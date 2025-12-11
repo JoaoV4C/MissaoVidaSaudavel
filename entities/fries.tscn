@@ -1,0 +1,150 @@
+[gd_scene load_steps=25 format=3 uid="uid://le3qaug4duqu"]
+
+[ext_resource type="Script" uid="uid://b7q50irpt7umd" path="res://scripts/fries.gd" id="1_d3l13"]
+[ext_resource type="Texture2D" uid="uid://bdv67iujib5pj" path="res://sprites/2 - Fritoz/throw-object/frame_000.png" id="2_hob2m"]
+[ext_resource type="Texture2D" uid="uid://dg228gcrl7rsk" path="res://sprites/2 - Fritoz/throw-object/frame_001.png" id="3_1dlr3"]
+[ext_resource type="Texture2D" uid="uid://dn46iitwhwpxf" path="res://sprites/2 - Fritoz/throw-object/frame_002.png" id="4_7e64g"]
+[ext_resource type="Texture2D" uid="uid://bws23ml1qmtc8" path="res://sprites/2 - Fritoz/throw-object/frame_003.png" id="5_kdcxl"]
+[ext_resource type="Texture2D" uid="uid://bjmtqac387rq5" path="res://sprites/2 - Fritoz/throw-object/frame_004.png" id="6_xhaag"]
+[ext_resource type="Texture2D" uid="uid://c7j422ywbgve0" path="res://sprites/2 - Fritoz/throw-object/frame_005.png" id="7_vxg2v"]
+[ext_resource type="Texture2D" uid="uid://cp6w5t0rirxlc" path="res://sprites/2 - Fritoz/throw-object/frame_006.png" id="8_75qag"]
+[ext_resource type="Texture2D" uid="uid://dwlv2x5m6s3vv" path="res://sprites/2 - Fritoz/falling-back-death/frame_001.png" id="8_tnxd5"]
+[ext_resource type="Texture2D" uid="uid://c3ct6x3fuypj6" path="res://sprites/2 - Fritoz/falling-back-death/frame_002.png" id="9_rppof"]
+[ext_resource type="Texture2D" uid="uid://dfh6j4vp0v4yx" path="res://sprites/2 - Fritoz/falling-back-death/frame_003.png" id="10_hob2m"]
+[ext_resource type="Texture2D" uid="uid://2unr3u5fx7x7" path="res://sprites/2 - Fritoz/falling-back-death/frame_004.png" id="11_1dlr3"]
+[ext_resource type="Texture2D" uid="uid://domcw2ju8ljru" path="res://sprites/2 - Fritoz/falling-back-death/frame_005.png" id="12_7e64g"]
+[ext_resource type="Texture2D" uid="uid://c43wk7a4ib3fh" path="res://sprites/2 - Fritoz/running-6-frames/frame_000.png" id="13_d3l13"]
+[ext_resource type="Texture2D" uid="uid://df2l03mhv0a5d" path="res://sprites/2 - Fritoz/falling-back-death/frame_006.png" id="13_kdcxl"]
+[ext_resource type="Texture2D" uid="uid://dkvujpeclupn" path="res://sprites/2 - Fritoz/falling-back-death/frame_000.png" id="13_tnxd5"]
+[ext_resource type="Texture2D" uid="uid://b2bahdhw6fom3" path="res://sprites/2 - Fritoz/running-6-frames/frame_001.png" id="14_tnxd5"]
+[ext_resource type="Texture2D" uid="uid://bf2d2d0n3on4d" path="res://sprites/2 - Fritoz/running-6-frames/frame_002.png" id="15_rppof"]
+[ext_resource type="Texture2D" uid="uid://du16mjowtqjf1" path="res://sprites/2 - Fritoz/running-6-frames/frame_003.png" id="16_hob2m"]
+[ext_resource type="Texture2D" uid="uid://b0x8770jax3da" path="res://sprites/2 - Fritoz/running-6-frames/frame_004.png" id="17_1dlr3"]
+[ext_resource type="Texture2D" uid="uid://do0csex45vlp6" path="res://sprites/2 - Fritoz/running-6-frames/frame_005.png" id="18_7e64g"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fpmxe"]
+radius = 7.0
+height = 26.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yag7t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hob2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1dlr3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7e64g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kdcxl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xhaag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vxg2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_75qag")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_tnxd5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tnxd5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rppof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hob2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1dlr3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7e64g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_kdcxl")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_d3l13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_tnxd5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_rppof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hob2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_1dlr3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_7e64g")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yag7t"]
+size = Vector2(12, 26)
+
+[node name="Fries" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_d3l13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_fpmxe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.8125, 0.833393)
+sprite_frames = SubResource("SpriteFrames_yag7t")
+animation = &"walk"
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Enemies"]]
+visible = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2, 3)
+shape = SubResource("RectangleShape2D_yag7t")
+debug_color = Color(0.967938, 0, 0.471078, 0.42)
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+position = Vector2(1, 13)
+target_position = Vector2(11, 0)
+
+[node name="GroundDetector" type="RayCast2D" parent="."]
+position = Vector2(11, 0)
+target_position = Vector2(0, 19)
+
+[node name="PlayerDetector" type="RayCast2D" parent="."]
+position = Vector2(0, 13)
+target_position = Vector2(48, 0)
+collision_mask = 2
+
+[node name="BoneStartPosition" type="Node2D" parent="."]
+position = Vector2(13, -1)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
