@@ -35,11 +35,19 @@ var jump_count = 0
 var direction = 0
 var status: PlayerState
 var health = 3
+var is_invincible = false
+var invincibility_timer = 0.0
+const INVINCIBILITY_DURATION = 1.0
 		
 func _ready() -> void:
 	go_to_idle_state()
 
 func _physics_process(delta: float) -> void:
+	# Atualizar timer de invencibilidade
+	if is_invincible:
+		invincibility_timer -= delta
+		if invincibility_timer <= 0:
+			is_invincible = false
 	
 	match status:
 		PlayerState.idle:
@@ -271,8 +279,18 @@ func hit_lethal_area():
 	take_damage()
 
 func take_damage():
+	# Se está invencível, ignorar dano
+	if is_invincible:
+		print("[PLAYER] Invencível - dano ignorado")
+		return
+	
 	health -= 1
 	print("Player health: ", health)
+	
+	# Ativar invencibilidade
+	is_invincible = true
+	invincibility_timer = INVINCIBILITY_DURATION
+	
 	if health <= 0:
 		go_to_dead_state()
 	else:

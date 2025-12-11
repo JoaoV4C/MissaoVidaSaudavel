@@ -18,7 +18,8 @@ const SPEED = 30.0
 const CHASE_SPEED = 50.0
 const DETECTION_RANGE = 150.0
 const ATTACK_DISTANCE = 60.0
-const ATTACK_COOLDOWN = 5.0
+const MIN_DISTANCE = 15.0
+const ATTACK_COOLDOWN = 3.0
 const JUMP_VELOCITY = -400.0
 
 var status: BurgerState
@@ -85,12 +86,21 @@ func walk_state(_delta):
 				scale.x *= -1
 				direction = direction_to_player
 			
+			# Parar a 15 pixels de distância para evitar ficar em cima do player
+			if abs_x_distance <= MIN_DISTANCE:
+				velocity.x = 0
+				if anim.animation != "idle":
+					anim.play("idle")
 			# Se está dentro do range de ataque, usa velocidade normal (padrão)
-			# Senão, usa velocidade de perseguição
-			if abs_x_distance <= ATTACK_DISTANCE:
+			elif abs_x_distance <= ATTACK_DISTANCE:
 				velocity.x = SPEED * direction
+				if anim.animation != "walk":
+					anim.play("walk")
+			# Senão, usa velocidade de perseguição
 			else:
 				velocity.x = CHASE_SPEED * direction
+				if anim.animation != "walk":
+					anim.play("walk")
 			
 			# Verificar se está próximo o suficiente para atacar
 			if abs_x_distance <= ATTACK_DISTANCE and attack_cooldown_timer <= 0:
