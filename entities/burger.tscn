@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bes2p46skt65p"]
+[gd_scene load_steps=44 format=3 uid="uid://bes2p46skt65p"]
 
 [ext_resource type="Script" uid="uid://c6j5xb8qlf48b" path="res://scripts/burger.gd" id="1_yag7t"]
 [ext_resource type="Texture2D" uid="uid://b0ywukghge4yf" path="res://sprites/3 - Burger/throw-object/frame_002.png" id="3_kjous"]
@@ -17,7 +17,11 @@
 [ext_resource type="Texture2D" uid="uid://cuhe48sa8ge8d" path="res://sprites/3 - Burger/falling-back-death/frame_003.png" id="10_74kl1"]
 [ext_resource type="Texture2D" uid="uid://dqbcewo5fjonp" path="res://sprites/3 - Burger/falling-back-death/frame_004.png" id="11_chyv4"]
 [ext_resource type="Texture2D" uid="uid://dajm3io7xw1xx" path="res://sprites/3 - Burger/falling-back-death/frame_005.png" id="12_k1ksj"]
+[ext_resource type="Texture2D" uid="uid://bufibajiqachm" path="res://sprites/3 - Burger/breathing-idle/frame_000.png" id="13_l0hr2"]
 [ext_resource type="Texture2D" uid="uid://cu3p7k66ib232" path="res://sprites/3 - Burger/falling-back-death/frame_006.png" id="13_uhcs1"]
+[ext_resource type="Texture2D" uid="uid://di77mmtx028kg" path="res://sprites/3 - Burger/breathing-idle/frame_001.png" id="14_sjcih"]
+[ext_resource type="Texture2D" uid="uid://bx0ca1707if8h" path="res://sprites/3 - Burger/breathing-idle/frame_002.png" id="15_acd4k"]
+[ext_resource type="Texture2D" uid="uid://c0xubn1qbts5m" path="res://sprites/3 - Burger/breathing-idle/frame_003.png" id="16_x6g0o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fpmxe"]
 radius = 7.0
@@ -145,6 +149,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("13_l0hr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_sjcih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_acd4k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_x6g0o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_uhcs1")
 }, {
 "duration": 1.0,
@@ -182,7 +203,7 @@ shape = SubResource("CapsuleShape2D_fpmxe")
 position = Vector2(1, 2)
 scale = Vector2(0.875, 0.8975)
 sprite_frames = SubResource("SpriteFrames_yag7t")
-animation = &"hurt"
+animation = &"idle"
 
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemies"]]
 visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://le3qaug4duqu"]
+[gd_scene load_steps=29 format=3 uid="uid://le3qaug4duqu"]
 
 [ext_resource type="Script" uid="uid://b7q50irpt7umd" path="res://scripts/fries.gd" id="1_d3l13"]
 [ext_resource type="Texture2D" uid="uid://bdv67iujib5pj" path="res://sprites/2 - Fritoz/throw-object/frame_000.png" id="2_hob2m"]
@@ -19,8 +19,12 @@
 [ext_resource type="Texture2D" uid="uid://b2bahdhw6fom3" path="res://sprites/2 - Fritoz/running-6-frames/frame_001.png" id="14_tnxd5"]
 [ext_resource type="Texture2D" uid="uid://bf2d2d0n3on4d" path="res://sprites/2 - Fritoz/running-6-frames/frame_002.png" id="15_rppof"]
 [ext_resource type="Texture2D" uid="uid://du16mjowtqjf1" path="res://sprites/2 - Fritoz/running-6-frames/frame_003.png" id="16_hob2m"]
+[ext_resource type="Texture2D" uid="uid://cmrbbe3gudir" path="res://sprites/2 - Fritoz/idle/frame_000.png" id="16_xhaag"]
 [ext_resource type="Texture2D" uid="uid://b0x8770jax3da" path="res://sprites/2 - Fritoz/running-6-frames/frame_004.png" id="17_1dlr3"]
+[ext_resource type="Texture2D" uid="uid://d0ku0245lu2vi" path="res://sprites/2 - Fritoz/idle/frame_001.png" id="17_vxg2v"]
 [ext_resource type="Texture2D" uid="uid://do0csex45vlp6" path="res://sprites/2 - Fritoz/running-6-frames/frame_005.png" id="18_7e64g"]
+[ext_resource type="Texture2D" uid="uid://dcyookcnm2ke5" path="res://sprites/2 - Fritoz/idle/frame_002.png" id="18_75qag"]
+[ext_resource type="Texture2D" uid="uid://bk3cnnp8tdao4" path="res://sprites/2 - Fritoz/idle/frame_003.png" id="19_f7lm6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fpmxe"]
 radius = 7.0
@@ -82,6 +86,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("16_xhaag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_vxg2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_75qag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_f7lm6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("13_d3l13")
 }, {
 "duration": 1.0,
@@ -119,7 +140,7 @@ shape = SubResource("CapsuleShape2D_fpmxe")
 position = Vector2(1, 1)
 scale = Vector2(0.8125, 0.833393)
 sprite_frames = SubResource("SpriteFrames_yag7t")
-animation = &"walk"
+animation = &"idle"
 
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemies"]]
 visible = false
