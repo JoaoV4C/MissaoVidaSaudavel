@@ -7,6 +7,7 @@ enum PlayerState {
 	fall,
 	duck,
 	wall,
+	hurt,
 	dead
 }
 
@@ -53,6 +54,8 @@ func _physics_process(delta: float) -> void:
 			duck_state(delta)
 		PlayerState.wall:
 			wall_state(delta)
+		PlayerState.hurt:
+			hurt_state(delta)
 		PlayerState.dead:
 			dead_state(delta)
 			
@@ -90,6 +93,11 @@ func go_to_wall_state():
 	anim.play("wall")
 	velocity = Vector2.ZERO
 	jump_count = 0
+
+func go_to_hurt_state():
+	status = PlayerState.hurt
+	anim.play("getting hit")
+	velocity.x = 0
 	
 func go_to_dead_state():
 	if status == PlayerState.dead:
@@ -193,7 +201,10 @@ func wall_state(delta):
 		velocity.x = wall_jump_velocity * direction
 		go_to_jump_state()
 		return
-		
+
+func hurt_state(delta):
+	apply_gravity(delta)
+	# Estado de hurt é controlado pela animação - quando terminar volta ao estado normal
 		
 func dead_state(delta):
 	apply_gravity(delta)
@@ -264,6 +275,8 @@ func take_damage():
 	print("Player health: ", health)
 	if health <= 0:
 		go_to_dead_state()
+	else:
+		go_to_hurt_state()
 
 func _on_reload_timer_timeout() -> void:
 	get_tree().reload_current_scene()
@@ -272,3 +285,12 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Water"):
 		jump_count = 0
 		go_to_jump_state()
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if anim.animation == "getting hit":
+		anim.play("getting up")
+	elif anim.animation == "getting up":
+		if is_on_floor():
+			go_to_idle_state()
+		else:
+			go_to_fall_state()

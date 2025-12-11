@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://c8yhqpob56plw"]
+[gd_scene load_steps=17 format=4 uid="uid://c8yhqpob56plw"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_bmxgx"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_ry6l7"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://nm82sifvd23i" path="res://entities/level_end.tscn" id="10_d18o5"]
 [ext_resource type="PackedScene" uid="uid://bes2p46skt65p" path="res://entities/burger.tscn" id="11_t8vtq"]
 [ext_resource type="PackedScene" uid="uid://7dkaekrflgga" path="res://entities/moving_platform.tscn" id="14_xflqb"]
-[ext_resource type="PackedScene" uid="uid://le3qaug4duqu" path="res://entities/fries.tscn" id="14_xnncp"]
 [ext_resource type="Texture2D" uid="uid://bisx3qseefq0j" path="res://sprites/Seasonal Tilesets/7 - Hud/apple_hud.png" id="15_mjtd1"]
 [ext_resource type="FontFile" uid="uid://dlo5r8y4er47f" path="res://fonts/pixelmix.ttf" id="16_kjkl5"]
 
@@ -167,9 +166,6 @@ position = Vector2(43, 161)
 
 [node name="Burger" parent="." instance=ExtResource("11_t8vtq")]
 position = Vector2(296, 157)
-
-[node name="Fries" parent="." instance=ExtResource("14_xnncp")]
-position = Vector2(132, 162)
 
 [node name="LevelEnd" parent="." instance=ExtResource("10_d18o5")]
 position = Vector2(541, 139)
