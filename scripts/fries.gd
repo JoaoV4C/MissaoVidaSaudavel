@@ -16,14 +16,18 @@ const SPINNING_PROJECT = preload("res://entities/tomato.tscn")
 @onready var bone_start_position: Node2D = $BoneStartPosition
 
 const SPEED = 30.0
+const CHASE_SPEED = 50.0
+const DETECTION_RANGE = 100.0
 const JUMP_VELOCITY = -400.0
 
 var status: FriesState
 
 var direction = 1
 var can_throw = true
+var player: CharacterBody2D = null
 
 func _ready() -> void:
+	player = get_tree().get_first_node_in_group("Player")
 	go_to_walk_state()
 
 func _physics_process(delta: float) -> void:
@@ -58,18 +62,38 @@ func go_to_hurt_state():
 	velocity = Vector2.ZERO
 	
 func walk_state(_delta):
-	if anim.frame == 3 or anim.frame == 4:
-		velocity.x = SPEED * direction
-	else:
-		velocity.x = 0
+	# Verificar se o player está próximo
+	var is_chasing = false
+	if player:
+		# Calcular diferença no eixo X
+		var x_difference = player.global_position.x - global_position.x
+		var abs_x_distance = abs(x_difference)
+		
+		# Verificar se está dentro do range de 100 pixels no eixo X
+		if abs_x_distance <= DETECTION_RANGE:
+			is_chasing = true
+			# Determinar direção para o player - SEMPRE atualiza a direção enquanto persegue
+			var direction_to_player = sign(x_difference)
+			if direction_to_player != 0 and direction_to_player != direction:
+				scale.x *= -1
+				direction = direction_to_player
+			# Mover em direção ao player
+			velocity.x = CHASE_SPEED * direction
 	
-	if wall_detector.is_colliding():
-		scale.x *= -1
-		direction *= -1
-	
-	if not ground_detector.is_colliding():
-		scale.x *= -1
-		direction *= -1
+	if not is_chasing:
+		# Comportamento normal de patrulha
+		if anim.frame == 3 or anim.frame == 4:
+			velocity.x = SPEED * direction
+		else:
+				velocity.x = 0
+		
+		if wall_detector.is_colliding():
+			scale.x *= -1
+			direction *= -1
+		
+		if not ground_detector.is_colliding():
+			scale.x *= -1
+			direction *= -1
 		
 	if player_detector.is_colliding():
 		go_to_attack_state()

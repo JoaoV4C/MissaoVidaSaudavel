@@ -28,7 +28,7 @@ var player: CharacterBody2D = null
 
 func _ready() -> void:
 	anim.flip_h = true
-	player = get_tree().get_first_node_in_group("player")
+	player = get_tree().get_first_node_in_group("Player")
 	go_to_walk_state()
 
 func _physics_process(delta: float) -> void:
@@ -66,15 +66,18 @@ func walk_state(_delta):
 	# Verificar se o player está próximo
 	var is_chasing = false
 	if player:
-		var distance_to_player = global_position.distance_to(player.global_position)
-		if distance_to_player <= DETECTION_RANGE:
+		# Calcular diferença no eixo X
+		var x_difference = player.global_position.x - global_position.x
+		var abs_x_distance = abs(x_difference)
+		
+		# Verificar se está dentro do range de 100 pixels no eixo X
+		if abs_x_distance <= DETECTION_RANGE:
 			is_chasing = true
-			# Determinar direção para o player
-			var direction_to_player = sign(player.global_position.x - global_position.x)
-			if direction_to_player != 0:
-				if direction_to_player != direction:
-					scale.x *= -1
-					direction = direction_to_player
+			# Determinar direção para o player - SEMPRE atualiza a direção enquanto persegue
+			var direction_to_player = sign(x_difference)
+			if direction_to_player != 0 and direction_to_player != direction:
+				scale.x *= -1
+				direction = direction_to_player
 			# Mover em direção ao player
 			velocity.x = CHASE_SPEED * direction
 	
