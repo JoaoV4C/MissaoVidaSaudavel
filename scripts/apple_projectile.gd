@@ -2,35 +2,74 @@ extends Area2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
-var speed = 80
+var velocity = Vector2.ZERO
 var direction = 1
 var distance_traveled = 0.0
-var has_hit = false
-const MAX_DISTANCE = 300.0
+var has_exploded = false
+const MAX_DISTANCE = 80.0
+const HORIZONTAL_SPEED = 150.0
+const INITIAL_VERTICAL_VELOCITY = -200.0
+const GRAVITY = 600.0
+const EXPLOSION_RADIUS = 50.0
 
 func _ready():
 	add_to_group("PlayerProjectile")
 
 func _process(delta: float) -> void:
-	if has_hit:
+	if has_exploded:
 		return
-		
-	var movement = speed * delta * direction
-	position.x += movement
-	distance_traveled += abs(movement)
 	
-	# Destruir projétil após percorrer 300 pixels
-	if distance_traveled >= MAX_DISTANCE:
-		queue_free()
+	# Aplicar gravidade (movimento parabólico)
+	velocity.y += GRAVITY * delta
+	
+	# Movimento horizontal
+	velocity.x = HORIZONTAL_SPEED * direction
+	
+	# Atualizar posição
+	var movement = velocity * delta
+	position += movement
 
 func set_direction(throw_direction: int):
 	direction = throw_direction
+	velocity.x = HORIZONTAL_SPEED * direction
+	velocity.y = INITIAL_VERTICAL_VELOCITY
 	if anim:
 		anim.flip_h = direction < 0
 
+func explode():
+	if has_exploded:
+		return
+	
+	has_exploded = true
+	velocity = Vector2.ZERO
+	print("[APPLE] Explosão na posição: ", global_position)
+	
+	# Tocar animação de explosão
+	if anim:
+		anim.play("explosion")
+		anim.animation_finished.connect(_on_explosion_finished)
+	
+	# Buscar todos os nós do grupo "Enemies" e verificar distância
+	var enemies = get_tree().get_nodes_in_group("Enemies")
+	var enemies_killed = 0
+	
+	for enemy_hitbox in enemies:
+		# Calcular distância até a hitbox do inimigo
+		var distance = global_position.distance_to(enemy_hitbox.global_position)
+		
+		if distance <= EXPLOSION_RADIUS:
+			# Inimigo está dentro da área de explosão
+			var enemy = enemy_hitbox.get_parent()
+			if enemy and enemy.has_method("take_damage"):
+				enemy.take_damage()
+				enemies_killed += 1
+				print("[APPLE] Dano de explosão causado ao inimigo! Distância: ", distance)
+	
+	print("[APPLE] Explosão matou ", enemies_killed, " inimigo(s)")
+
 func _on_area_entered(area: Area2D) -> void:
-	# Se já acertou algo, ignorar
-	if has_hit:
+	# Se já explodiu, ignorar
+	if has_exploded:
 		return
 	
 	# Ignorar completamente qualquer coisa relacionada ao player
@@ -38,23 +77,14 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player") or (parent and parent.is_in_group("Player")):
 		return
 	
-	# Verificar se acertou um inimigo
+	# Se acertou um inimigo diretamente, explodir imediatamente
 	if area.is_in_group("Enemies"):
-		has_hit = true
-		monitoring = false
-		monitorable = false
-		
-		var enemy = area.get_parent()
-		if enemy and enemy.has_method("take_damage"):
-			enemy.take_damage()
-			print("[APPLE] Dano causado ao inimigo!")
-		
-		queue_free()
+		explode()
 		return
 
 func _on_body_entered(body: Node2D) -> void:
-	# Se já acertou algo, ignorar
-	if has_hit:
+	# Se já explodiu, ignorar
+	if has_exploded:
 		return
 	
 	# NUNCA colidir com o player - ignorar completamente
@@ -65,5 +95,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemies"):
 		return
 	
-	# Colidir com qualquer body (chão, parede, etc)
+	# Colidir com qualquer body (chão, parede, etc) - explodir
+	explode()
+
+func _on_explosion_finished():
+	# Destruir a maçã após a animação de explosão terminar
 	queue_free()
