@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx8k7navwn3pf"]
+
+[ext_resource type="Script" uid="uid://cciwkdbvjyfbn" path="res://scripts/enemy_info_popup.gd" id="1_enemy_info"]
+[ext_resource type="FontFile" uid="uid://dlo5r8y4er47f" path="res://fonts/pixelmix.ttf" id="2_font"]
+
+[node name="EnemyInfoPopup" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_enemy_info")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="EnemyName" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 14
+text = "Nome do Inimigo"
+horizontal_alignment = 1
+
+[node name="EnemySprite" type="TextureRect" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+stretch_mode = 5
+
+[node name="EnemySubtitle" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 10
+text = "Subtitulo"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="EnemyDescription" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 8
+text = "Descricao do inimigo vai aqui explicando o que ele representa."
+autowrap_mode = 3
+
+[node name="EnemyAttack" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 8
+text = "Ataque: Descricao do ataque"
+autowrap_mode = 3
+
+[node name="ContinueLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 7
+text = "Pressione qualquer tecla para continuar..."
+horizontal_alignment = 1

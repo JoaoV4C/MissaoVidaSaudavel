@@ -22,6 +22,7 @@ enum PlayerState {
 
 const GAME_OVER = preload("res://entities/game_over.tscn")
 const DIALOGUE_POPUP = preload("res://scene/dialogue_popup.tscn")
+const ENEMY_INFO_POPUP = preload("res://entities/enemy_info_popup.tscn")
 
 @export var max_speed = 180.0
 @export var acceleration = 400.0
@@ -68,9 +69,8 @@ func _physics_process(delta: float) -> void:
 	if throw_cooldown > 0:
 		throw_cooldown -= delta
 	
-	# Verificar inimigos próximos para mostrar diálogo
-	if not Globals.first_enemy_dialogue_shown:
-		check_nearby_enemies()
+	# Verificar inimigos próximos para mostrar diálogo e popups
+	check_nearby_enemies()
 	
 	# Alternar tipo de projétil com Q
 	if Input.is_action_just_pressed("switch_weapon"):  # Tecla Q
@@ -451,16 +451,51 @@ func check_nearby_enemies():
 					var camera_pos = camera.get_screen_center_position()
 					var screen_rect = Rect2(camera_pos - viewport_rect.size / 2, viewport_rect.size)
 					if screen_rect.has_point(enemy.global_position):
-						# Verificar se é o boss
-						var is_boss = enemy.get_script() and enemy.get_script().resource_path.contains("boss.gd")
-						if is_boss and not Globals.first_boss_dialogue_shown:
-							Globals.first_boss_dialogue_shown = true
-							show_boss_dialogue()
-							break
-						elif not is_boss and not Globals.first_enemy_dialogue_shown:
+						# Mostrar diálogo genérico na primeira vez que vê qualquer inimigo
+						if not Globals.first_enemy_dialogue_shown:
 							Globals.first_enemy_dialogue_shown = true
-							show_enemy_dialogue()
-							break
+							await show_enemy_dialogue()
+						
+						# Identificar tipo de inimigo
+						var enemy_script = enemy.get_script()
+						if enemy_script:
+							var script_path = enemy_script.resource_path
+							
+							# Boss
+							if script_path.contains("boss.gd"):
+								if not Globals.first_boss_seen:
+									Globals.first_boss_seen = true
+									await show_enemy_info("boss")
+									return
+								elif not Globals.first_boss_dialogue_shown:
+									Globals.first_boss_dialogue_shown = true
+									show_boss_dialogue()
+									return
+								continue
+							
+							# Burger
+							elif script_path.contains("burger.gd"):
+								if not Globals.first_burger_seen:
+									Globals.first_burger_seen = true
+									await show_enemy_info("burger")
+									return
+								continue
+							
+							# Fries
+							elif script_path.contains("fries.gd"):
+								if not Globals.first_fries_seen:
+									Globals.first_fries_seen = true
+									await show_enemy_info("fries")
+									return
+								continue
+							
+							# Sodaz
+							elif script_path.contains("sodaz.gd"):
+								if not Globals.first_sodaz_seen:
+									Globals.first_sodaz_seen = true
+									await show_enemy_info("sodaz")
+									return
+								continue
 
 func show_enemy_dialogue():
 	var dialogue = DIALOGUE_POPUP.instantiate()
@@ -471,6 +506,11 @@ func show_boss_dialogue():
 	var dialogue = DIALOGUE_POPUP.instantiate()
 	get_tree().root.add_child(dialogue)
 	await dialogue.show_dialogue("Voce e a maior e mais triste mentira da Vila Viva! Mas eu aprendi o segredo: quanto mais eu me cuido, mais forte eu fico! Agora, vou usar a minha energia limpa para acabar com essa sua poluicao!")
+
+func show_enemy_info(enemy_type: String):
+	var info_popup = ENEMY_INFO_POPUP.instantiate()
+	get_tree().root.add_child(info_popup)
+	await info_popup.show_enemy_info(enemy_type)
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "getting hit":

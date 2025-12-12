@@ -33,5 +33,11 @@ func show_game_over():
 	Globals.first_enemy_dialogue_shown = false
 	Globals.first_boss_dialogue_shown = false
 	
+	# Resetar flags de visualização de inimigos
+	Globals.first_burger_seen = false
+	Globals.first_fries_seen = false
+	Globals.first_sodaz_seen = false
+	Globals.first_boss_seen = false
+	
 	# Recarregar cena
 	get_tree().reload_current_scene()
