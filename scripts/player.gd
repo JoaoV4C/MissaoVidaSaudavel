@@ -6,7 +6,6 @@ enum PlayerState {
 	jump,
 	fall,
 	duck,
-	wall,
 	hurt,
 	dead
 }
@@ -14,8 +13,6 @@ enum PlayerState {
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
-@onready var left_wall_detector: RayCast2D = $LeftWallDetector
-@onready var right_wall_detector: RayCast2D = $RightWallDetector
 @onready var projectile_spawn: Marker2D = $ProjectileSpawn
 
 @onready var reload_timer: Timer = $ReloadTimer
@@ -27,8 +24,6 @@ const ENEMY_INFO_POPUP = preload("res://entities/enemy_info_popup.tscn")
 @export var max_speed = 180.0
 @export var acceleration = 400.0
 @export var deceleration = 400.0
-@export var wall_acceleration = 40.0
-@export var wall_jump_velocity = 240.0
 @export var water_max_speed = 100
 @export var water_acceleration = 200
 @export var water_jump_force = -100
@@ -92,8 +87,6 @@ func _physics_process(delta: float) -> void:
 			fall_state(delta)
 		PlayerState.duck:
 			duck_state(delta)
-		PlayerState.wall:
-			wall_state(delta)
 		PlayerState.hurt:
 			hurt_state(delta)
 		PlayerState.dead:
@@ -137,13 +130,6 @@ func go_to_duck_state():
 	
 func exit_from_duck_state():
 	set_large_collider()
-	
-	
-func go_to_wall_state():
-	status = PlayerState.wall
-	anim.play("wall")
-	velocity = Vector2.ZERO
-	jump_count = 0
 
 func go_to_hurt_state():
 	status = PlayerState.hurt
@@ -222,39 +208,12 @@ func fall_state(delta):
 			go_to_walk_state()
 		return
 		
-	if (left_wall_detector.is_colliding() or right_wall_detector.is_colliding()) && is_on_wall():
-		go_to_wall_state()
-		return
-		
 func duck_state(delta):
 	apply_gravity(delta)
 	update_direction()
 	if Input.is_action_just_released("duck"):
 		exit_from_duck_state()
 		go_to_idle_state()
-		return
-		
-func wall_state(delta):
-	
-	velocity.y += wall_acceleration * delta
-	
-	if left_wall_detector.is_colliding():
-		anim.flip_h = false
-		direction = 1
-	elif right_wall_detector.is_colliding():
-		anim.flip_h = true
-		direction = -1
-	else:
-		go_to_fall_state()
-		return
-	
-	if is_on_floor():
-		go_to_idle_state()
-		return
-		
-	if Input.is_action_just_pressed("jump"):
-		velocity.x = wall_jump_velocity * direction
-		go_to_jump_state()
 		return
 
 func hurt_state(delta):
