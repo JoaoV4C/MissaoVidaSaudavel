@@ -333,6 +333,9 @@ func take_damage():
 		go_to_hurt_state()
 
 func _on_reload_timer_timeout() -> void:
+	# Resetar munição ao reiniciar a cena
+	Globals.apples = 10
+	Globals.carrots = 10
 	get_tree().reload_current_scene()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
