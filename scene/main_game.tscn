@@ -189,7 +189,7 @@ limit_right = 1240
 limit_bottom = 368
 
 [node name="Player" parent="." instance=ExtResource("1_main")]
-position = Vector2(43, 161)
+position = Vector2(34, 162)
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 

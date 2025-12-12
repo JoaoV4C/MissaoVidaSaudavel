@@ -147,20 +147,11 @@ func take_damage(damage = 100):
 		modulate = Color(1, 1, 1)
 
 func drop_water_bottle():
-	# 30% de chance de dropar vida
-	if randf() < 0.3:
-		var life = LIFE_COLLECTIBLE.instantiate()
-		get_parent().add_child(life)
-		life.global_position = global_position
-		print("[SODAZ] Dropou vida na posição: ", global_position)
-		return
-	
 	# 100% de chance de dropar water bottle
-	if randf() < 1.0:
-		var bottle = WATER_BOTTLE.instantiate()
-		get_parent().add_child(bottle)
-		bottle.global_position = global_position
-		print("[SODAZ] Water bottle dropado!")
+	var bottle = WATER_BOTTLE.instantiate()
+	get_parent().add_child(bottle)
+	bottle.global_position = global_position
+	print("[SODAZ] Water bottle dropado!")
 	
 func throw_bubble():
 	var new_bubble = SODA_BUBBLE.instantiate()
