@@ -1,0 +1,144 @@
+[gd_scene load_steps=20 format=3 uid="uid://8yokkmvcd1t4"]
+
+[ext_resource type="Script" uid="uid://dux5llrgrwea1" path="res://scripts/soda_bubble.gd" id="1_juwew"]
+[ext_resource type="Texture2D" uid="uid://cafxj7bh4td2x" path="res://sprites/General Tiles/soda_buble.png" id="2_3li05"]
+[ext_resource type="Texture2D" uid="uid://gpgn1k7l0a8" path="res://sprites/General Tiles/Free Smoke Fx  Pixel 07.png" id="5_fynfs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_njpw1"]
+radius = 4.12311
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6m1n"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(0, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqhnw"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(64, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsx4a"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(128, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcypa"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(192, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ags14"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(256, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afmnx"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(320, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dl8d"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(384, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ja8p"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(448, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73vat"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(512, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocfaw"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(576, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1sw2"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(640, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fycvr"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(704, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfb5g"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(768, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcct2"]
+atlas = ExtResource("5_fynfs")
+region = Rect2(832, 768, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjyle"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3li05")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6m1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqhnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsx4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcypa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ags14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afmnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dl8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ja8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73vat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocfaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1sw2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fycvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfb5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcct2")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 10.0
+}]
+
+[node name="SodaBubble" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_juwew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_njpw1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.570312, 0.570312)
+sprite_frames = SubResource("SpriteFrames_cjyle")
+autoplay = "default"
+
+[node name="SelfDestructTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="SelfDestructTimer" to="." method="_on_self_destruct_timer_timeout"]

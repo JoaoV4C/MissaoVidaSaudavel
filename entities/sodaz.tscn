@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://d1ml4tvjjx6bl"]
 
-[ext_resource type="Script" uid="uid://b7q50irpt7umd" path="res://scripts/fries.gd" id="1_0i4b2"]
+[ext_resource type="Script" uid="uid://3hjlb3ljj2h6" path="res://scripts/sodaz.gd" id="1_m06ph"]
 [ext_resource type="Texture2D" uid="uid://cdc1ntl6ol7wi" path="res://sprites/5 - Sodaz/throw-object/frame_001.png" id="2_m06ph"]
 [ext_resource type="Texture2D" uid="uid://dfqhu6lxrpalu" path="res://sprites/5 - Sodaz/throw-object/frame_002.png" id="3_0i4b2"]
 [ext_resource type="Texture2D" uid="uid://cci7y5btxfo5j" path="res://sprites/5 - Sodaz/throw-object/frame_003.png" id="4_cxfkc"]
@@ -126,7 +126,7 @@ size = Vector2(12, 26)
 
 [node name="Sodaz" type="CharacterBody2D"]
 collision_layer = 4
-script = ExtResource("1_0i4b2")
+script = ExtResource("1_m06ph")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
