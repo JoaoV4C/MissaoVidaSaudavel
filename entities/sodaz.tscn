@@ -1,0 +1,169 @@
+[gd_scene load_steps=28 format=3 uid="uid://d1ml4tvjjx6bl"]
+
+[ext_resource type="Script" uid="uid://b7q50irpt7umd" path="res://scripts/fries.gd" id="1_0i4b2"]
+[ext_resource type="Texture2D" uid="uid://cdc1ntl6ol7wi" path="res://sprites/5 - Sodaz/throw-object/frame_001.png" id="2_m06ph"]
+[ext_resource type="Texture2D" uid="uid://dfqhu6lxrpalu" path="res://sprites/5 - Sodaz/throw-object/frame_002.png" id="3_0i4b2"]
+[ext_resource type="Texture2D" uid="uid://cci7y5btxfo5j" path="res://sprites/5 - Sodaz/throw-object/frame_003.png" id="4_cxfkc"]
+[ext_resource type="Texture2D" uid="uid://q76f7vb7xm3o" path="res://sprites/5 - Sodaz/throw-object/frame_004.png" id="5_g8lm7"]
+[ext_resource type="Texture2D" uid="uid://cbbeppco32ech" path="res://sprites/5 - Sodaz/throw-object/frame_005.png" id="6_rep7r"]
+[ext_resource type="Texture2D" uid="uid://c528u1dcq75eu" path="res://sprites/5 - Sodaz/throw-object/frame_006.png" id="7_v47is"]
+[ext_resource type="Texture2D" uid="uid://b2st08jer04e1" path="res://sprites/5 - Sodaz/falling-back-death/frame_000.png" id="8_s2w3g"]
+[ext_resource type="Texture2D" uid="uid://mwe08qtt4l6j" path="res://sprites/5 - Sodaz/falling-back-death/frame_001.png" id="9_6xklx"]
+[ext_resource type="Texture2D" uid="uid://qhi5g8bq32xj" path="res://sprites/5 - Sodaz/falling-back-death/frame_002.png" id="10_xdis7"]
+[ext_resource type="Texture2D" uid="uid://ddj5feuuw1w84" path="res://sprites/5 - Sodaz/falling-back-death/frame_003.png" id="11_3gqnu"]
+[ext_resource type="Texture2D" uid="uid://q65hi6sllb4i" path="res://sprites/5 - Sodaz/falling-back-death/frame_004.png" id="12_18wdx"]
+[ext_resource type="Texture2D" uid="uid://bd5x8grpj2wb8" path="res://sprites/5 - Sodaz/falling-back-death/frame_005.png" id="13_s0t45"]
+[ext_resource type="Texture2D" uid="uid://c6oj6e8cht8ot" path="res://sprites/5 - Sodaz/falling-back-death/frame_006.png" id="14_bw082"]
+[ext_resource type="Texture2D" uid="uid://brnc7ovdyu5ys" path="res://sprites/5 - Sodaz/breathing-idle/frame_000.png" id="15_6l7wt"]
+[ext_resource type="Texture2D" uid="uid://b3mnfl6sw5xyh" path="res://sprites/5 - Sodaz/breathing-idle/frame_001.png" id="16_p1gur"]
+[ext_resource type="Texture2D" uid="uid://b8tmyomf44d8m" path="res://sprites/5 - Sodaz/breathing-idle/frame_002.png" id="17_6mlji"]
+[ext_resource type="Texture2D" uid="uid://dn02ni02eile5" path="res://sprites/5 - Sodaz/breathing-idle/frame_003.png" id="18_njhya"]
+[ext_resource type="Texture2D" uid="uid://dowbpty201ivm" path="res://sprites/5 - Sodaz/running-6-frames/frame_000.png" id="19_5w7a5"]
+[ext_resource type="Texture2D" uid="uid://bu1lbwh3xa62o" path="res://sprites/5 - Sodaz/running-6-frames/frame_001.png" id="20_ape8y"]
+[ext_resource type="Texture2D" uid="uid://cr44kafmsonh" path="res://sprites/5 - Sodaz/running-6-frames/frame_002.png" id="21_qx0mq"]
+[ext_resource type="Texture2D" uid="uid://ctcdhc01n1fdf" path="res://sprites/5 - Sodaz/running-6-frames/frame_003.png" id="22_4vwa3"]
+[ext_resource type="Texture2D" uid="uid://dx8ls743iovnd" path="res://sprites/5 - Sodaz/running-6-frames/frame_004.png" id="23_ngjlp"]
+[ext_resource type="Texture2D" uid="uid://cue8oqrc2tr7b" path="res://sprites/5 - Sodaz/running-6-frames/frame_005.png" id="24_imig7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fpmxe"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yag7t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m06ph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0i4b2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cxfkc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g8lm7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rep7r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_v47is")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_s2w3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6xklx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xdis7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3gqnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_18wdx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_s0t45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_bw082")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_6l7wt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_p1gur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_6mlji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_njhya")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_5w7a5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ape8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_qx0mq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_4vwa3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ngjlp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_imig7")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yag7t"]
+size = Vector2(12, 26)
+
+[node name="Sodaz" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_0i4b2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_fpmxe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 2)
+scale = Vector2(0.8125, 0.833393)
+sprite_frames = SubResource("SpriteFrames_yag7t")
+animation = &"attack"
+frame = 5
+frame_progress = 1.0
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Enemies"]]
+visible = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2, 3)
+shape = SubResource("RectangleShape2D_yag7t")
+debug_color = Color(0.967938, 0, 0.471078, 0.42)
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+position = Vector2(1, 13)
+target_position = Vector2(11, 0)
+
+[node name="GroundDetector" type="RayCast2D" parent="."]
+position = Vector2(11, 0)
+target_position = Vector2(0, 19)
+
+[node name="PlayerDetector" type="RayCast2D" parent="."]
+position = Vector2(0, 13)
+target_position = Vector2(48, 0)
+collision_mask = 2
+
+[node name="TomatoStartPosition" type="Node2D" parent="."]
+position = Vector2(13, -1)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
