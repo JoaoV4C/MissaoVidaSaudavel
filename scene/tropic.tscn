@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://c8yhqpob56plw"]
+[gd_scene load_steps=27 format=4 uid="uid://c8yhqpob56plw"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_bmxgx"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_ry6l7"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://2wiujebc8t6s" path="res://scripts/ammo_display.gd" id="ammo_display_script"]
 [ext_resource type="Script" uid="uid://btbt1vv6as2jn" path="res://scripts/energy_bar.gd" id="energy_bar_script"]
 [ext_resource type="Script" uid="uid://dfkv1b2fk8lgc" path="res://scripts/hp_container.gd" id="hp_container_script"]
+[ext_resource type="Script" uid="uid://c4bgaews4xbgy" path="res://scripts/weapon_selector_ui.gd" id="weapon_selector_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d18o5"]
 size = Vector2(20, 192)
@@ -268,6 +269,7 @@ texture = ExtResource("19_uehjn")
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/control/container/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+script = ExtResource("weapon_selector_script")
 
 [node name="apples_container" type="HBoxContainer" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
