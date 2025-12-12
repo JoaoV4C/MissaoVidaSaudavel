@@ -11,6 +11,7 @@ const SODAZ = preload("res://entities/sodaz.tscn")
 const BOSS = preload("res://entities/boss.tscn")
 const LEVEL_INTRO = preload("res://entities/level_intro.tscn")
 const DIALOGUE_POPUP = preload("res://scene/dialogue_popup.tscn")
+const VICTORY_POPUP = preload("res://entities/victory_popup.tscn")
 
 var current_wave = 1
 var enemies_alive = 0
@@ -63,6 +64,7 @@ func start_next_wave():
 	if current_wave > waves.size():
 		print("[WAVE_MANAGER] Todas as ondas completadas!")
 		all_waves_completed.emit()
+		show_victory_popup()
 		return
 	
 	wave_active = true
@@ -162,3 +164,8 @@ func _on_enemy_died(_enemy):
 		# Aguardar 3 segundos antes da próxima onda
 		await get_tree().create_timer(3.0).timeout
 		start_next_wave()
+
+func show_victory_popup():
+	var victory = VICTORY_POPUP.instantiate()
+	get_tree().root.add_child(victory)
+	victory.show_victory()
