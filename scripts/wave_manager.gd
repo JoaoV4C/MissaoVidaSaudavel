@@ -9,11 +9,13 @@ const BURGER = preload("res://entities/burger.tscn")
 const FRIES = preload("res://entities/fries.tscn")
 const SODAZ = preload("res://entities/sodaz.tscn")
 const BOSS = preload("res://entities/boss.tscn")
+const LEVEL_INTRO = preload("res://entities/level_intro.tscn")
 
 var current_wave = 1
 var enemies_alive = 0
 var wave_active = false
 var spawn_points = []
+var has_shown_intro = false
 
 # Configuração das ondas: [burgers, fries, sodaz, boss]
 var waves = [
@@ -32,8 +34,20 @@ func _ready():
 	# Aguardar um frame para garantir que tudo está pronto
 	await get_tree().process_frame
 	
+	# Mostrar popup de introdução da fase
+	if not has_shown_intro:
+		has_shown_intro = true
+		await show_level_intro()
+	
 	# Iniciar primeira onda
 	start_next_wave()
+
+func show_level_intro():
+	var intro = LEVEL_INTRO.instantiate()
+	get_tree().root.add_child(intro)
+	intro.show_level_intro("Fase 1", "Entrada da Vila")
+	# Aguardar a intro terminar (2 segundos)
+	await get_tree().create_timer(2.0).timeout
 
 func register_spawn_point(spawn_point: Marker2D):
 	spawn_points.append(spawn_point)
