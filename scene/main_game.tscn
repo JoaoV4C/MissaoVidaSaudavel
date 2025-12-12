@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dol6aewxs6gs6"]
+[gd_scene load_steps=24 format=4 uid="uid://dol6aewxs6gs6"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_main"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_main"]
@@ -23,7 +23,6 @@
 [ext_resource type="Script" uid="uid://c4bgaews4xbgy" path="res://scripts/weapon_selector_ui.gd" id="21_main"]
 [ext_resource type="Script" uid="uid://dc84qkhca6hej" path="res://scripts/spawn_point.gd" id="22_main"]
 [ext_resource type="Script" uid="uid://c8wj0f5wmxtgf" path="res://scripts/wave_label.gd" id="23_main"]
-[ext_resource type="PackedScene" uid="uid://c4kqwj5xbfgxi" path="res://entities/life_collectible.tscn" id="24_6xmtq"]
 
 [node name="MainGame" type="Node2D"]
 metadata/_edit_vertical_guides_ = [520.0]
@@ -39,7 +38,7 @@ tile_map_data = PackedByteArray("AAAAAAsAAAAEAAEAAAAAAAwAAAAEAAIAAAAAAA0AAAAEAAI
 tile_set = ExtResource("2_main")
 
 [node name="Decoration" type="TileMapLayer" parent="TileMaps"]
-tile_map_data = PackedByteArray("AAAGAAoAAQAAAAAAAAAGAAkAAwABAAEAAAAHAAoAAQAAAAAAAAAQAAkAAwABAAEAAAAUAAoAAAABAAUAAAAVAAkAAAAJAAEAAAAfAAoAAAADAAUAAAAAAAoAAAAGAAUAAAABAAoAAAAGAAUAAAACAAoAAAAHAAUAAABLAAoAAAAFAAUAAABMAAoAAAAGAAUAAABNAAoAAAAGAAUAAAADAAoAAQABAAAAAAAEAAoAAQACAAAAAAAaAAgAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAGAAoAAQAAAAAAAAAGAAkAAwABAAEAAAAHAAoAAQAAAAAAAAAQAAkAAwABAAEAAAAUAAoAAAABAAUAAAAVAAkAAAAJAAEAAAAfAAoAAAADAAUAAAAAAAoAAAAGAAUAAAABAAoAAAAGAAUAAAACAAoAAAAHAAUAAABLAAoAAAAFAAUAAABMAAoAAAAGAAUAAABNAAoAAAAGAAUAAAADAAoAAQABAAAAAAAEAAoAAQACAAAAAAAaAAgAAgAAAAAAAAALAAgAAgAAAAAAAAAoAAgAAgAAAAAAAAA1AAgAAgAAAAAAAAASAAoAAwAJAAMAAAAeAAkAAwALAAIAAAAeAAoAAwALAAMAAAAfAAkAAwAMAAIAAAAgAAkAAwANAAIAAAAgAAoAAwANAAMAAAAhAAkAAwAOAAIAAAAiAAkAAwAPAAIAAAAiAAoAAwAPAAMAAAArAAoAAAABAAUAAAAlAAoAAAABAAUAAAANAAoAAAADAAUAAAA6AAkAAAAOAAQAAAA6AAoAAAAOAAUAAAA7AAkAAAAPAAQAAAA8AAkAAAAQAAQAAAA8AAoAAAAQAAUAAAA9AAkAAAARAAQAAAA+AAkAAAAQAAQAAAA+AAoAAAAQAAUAAAAhAAoAAQACAAAAAAAjAAoAAQABAAAAAAATAAoAAQADAAAAAAA2AAoAAwAGAAMAAAA3AAoAAwAGAAMAAAA4AAoAAwAHAAMAAAA1AAoAAwAFAAMAAAA7AAoAAQABAAAAAAA9AAoAAQADAAAAAAAcAAoAAwAJAAMAAAAtAAkAAAAFAAEAAAA5AAkAAAABAAEAAAA/AAkAAAARAAQAAABAAAkAAAAQAAQAAABAAAoAAAAQAAUAAABBAAkAAAARAAQAAABCAAkAAAAQAAQAAABCAAoAAAAQAAUAAABDAAkAAAARAAQAAABEAAkAAAASAAQAAABEAAoAAAASAAUAAABDAAoAAAADAAUAAAA=")
 tile_set = ExtResource("3_main")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -350,6 +349,3 @@ theme_override_font_sizes/font_size = 10
 text = "Onda 1/5"
 horizontal_alignment = 1
 script = ExtResource("23_main")
-
-[node name="Lifeollectible" parent="." instance=ExtResource("24_6xmtq")]
-position = Vector2(128, 154)
