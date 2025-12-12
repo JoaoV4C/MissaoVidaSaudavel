@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpt5b8o614m41"]
+
+[ext_resource type="Script" uid="uid://cucsdpi72yjo3" path="res://scripts/water_bottle.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bwlcu511eweq6" path="res://sprites/General Tiles/water-bottle.png" id="2_l4lu3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ch7v6"]
+radius = 3.0
+height = 14.0
+
+[node name="WaterBottle" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ch7v6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.8, 1, 1)
+scale = Vector2(0.40625, 0.40625)
+texture = ExtResource("2_l4lu3")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

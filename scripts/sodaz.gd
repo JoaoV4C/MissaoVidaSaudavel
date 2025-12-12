@@ -7,6 +7,7 @@ enum SodazState {
 }
 
 const SODA_BUBBLE = preload("res://entities/soda_bubble.tscn")
+const WATER_BOTTLE = preload("res://entities/water_bottle.tscn")
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $Hitbox
@@ -19,7 +20,7 @@ const CHASE_SPEED = 50.0
 const DETECTION_RANGE = 250.0
 const ATTACK_DISTANCE = 200.0
 const MIN_DISTANCE = 15.0
-const ATTACK_COOLDOWN = 3.0
+const ATTACK_COOLDOWN = 5.0
 const JUMP_VELOCITY = -400.0
 
 var status: SodazState
@@ -136,12 +137,21 @@ func take_damage(damage = 100):
 	print("[SODAZ] Took ", damage, " damage. Health: ", health, "/", MAX_HEALTH)
 	
 	if health <= 0:
+		drop_water_bottle()
 		go_to_hurt_state()
 	else:
 		# Piscar para indicar dano
 		modulate = Color(1, 0.5, 0.5)
 		await get_tree().create_timer(0.1).timeout
 		modulate = Color(1, 1, 1)
+
+func drop_water_bottle():
+	# 40% de chance de dropar water bottle
+	if randf() < 0.4:
+		var bottle = WATER_BOTTLE.instantiate()
+		get_parent().add_child(bottle)
+		bottle.global_position = global_position
+		print("[SODAZ] Water bottle dropado!")
 	
 func throw_bubble():
 	var new_bubble = SODA_BUBBLE.instantiate()

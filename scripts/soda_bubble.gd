@@ -8,7 +8,7 @@ var has_exploded = false
 const HORIZONTAL_SPEED = 150.0
 const INITIAL_VERTICAL_VELOCITY = -200.0
 const GRAVITY = 600.0
-const EXPLOSION_RADIUS = 50.0
+const EXPLOSION_RADIUS = 20.0
 
 func _process(delta: float) -> void:
 	if has_exploded:
