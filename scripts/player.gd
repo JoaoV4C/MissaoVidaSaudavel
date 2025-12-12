@@ -300,6 +300,13 @@ func hit_enemy(area: Area2D):
 		# inimigo morre
 		area.get_parent().take_damage()
 		go_to_jump_state()
+		
+		# Ejetar player para o lado
+		var enemy = area.get_parent()
+		var direction_to_player = sign(global_position.x - enemy.global_position.x)
+		if direction_to_player == 0:
+			direction_to_player = 1  # Padrão para direita se estiver exatamente em cima
+		velocity.x = direction_to_player * 150  # Empurrar para o lado
 	else:
 		# player toma dano
 		take_damage()
