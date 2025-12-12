@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://c8yhqpob56plw"]
+[gd_scene load_steps=26 format=4 uid="uid://c8yhqpob56plw"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_bmxgx"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_ry6l7"]
@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://8clgcsqv5vkj" path="res://sprites/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="8_xflqb"]
 [ext_resource type="PackedScene" uid="uid://cdtr6sp6pckop" path="res://entities/camera.tscn" id="9_34ia6"]
 [ext_resource type="PackedScene" uid="uid://nm82sifvd23i" path="res://entities/level_end.tscn" id="10_d18o5"]
+[ext_resource type="PackedScene" uid="uid://bes2p46skt65p" path="res://entities/burger.tscn" id="11_t8vtq"]
 [ext_resource type="PackedScene" uid="uid://7dkaekrflgga" path="res://entities/moving_platform.tscn" id="14_xflqb"]
+[ext_resource type="PackedScene" uid="uid://le3qaug4duqu" path="res://entities/fries.tscn" id="14_xnncp"]
 [ext_resource type="Texture2D" uid="uid://bisx3qseefq0j" path="res://sprites/Seasonal Tilesets/7 - Hud/apple_hud.png" id="15_mjtd1"]
 [ext_resource type="Texture2D" uid="uid://2keardv4cidw" path="res://sprites/Seasonal Tilesets/7 - Hud/healthbarUnder.png" id="16_b78wb"]
 [ext_resource type="Texture2D" uid="uid://2ep5330sou7q" path="res://sprites/Seasonal Tilesets/7 - Hud/lightning.png" id="16_kajwn"]
@@ -19,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://cqua7p3ba3sss" path="res://sprites/Seasonal Tilesets/7 - Hud/healthbarProgress.png" id="17_kajwn"]
 [ext_resource type="Texture2D" uid="uid://cbl0dfghm2m3t" path="res://sprites/Seasonal Tilesets/7 - Hud/carrot.png" id="18_3eg8f"]
 [ext_resource type="Texture2D" uid="uid://bul728afcma7d" path="res://sprites/Seasonal Tilesets/7 - Hud/hearts_hud.png" id="19_uehjn"]
-[ext_resource type="PackedScene" uid="uid://d1ml4tvjjx6bl" path="res://entities/sodaz.tscn" id="20_ovcmj"]
 [ext_resource type="Script" uid="uid://2wiujebc8t6s" path="res://scripts/ammo_display.gd" id="ammo_display_script"]
 [ext_resource type="Script" uid="uid://btbt1vv6as2jn" path="res://scripts/energy_bar.gd" id="energy_bar_script"]
 [ext_resource type="Script" uid="uid://dfkv1b2fk8lgc" path="res://scripts/hp_container.gd" id="hp_container_script"]
@@ -172,14 +173,14 @@ limit_bottom = 368
 [node name="Player" parent="." instance=ExtResource("1_bmxgx")]
 position = Vector2(43, 161)
 
-[node name="Sodaz" parent="." instance=ExtResource("20_ovcmj")]
-position = Vector2(355, 151)
+[node name="Burger" parent="." instance=ExtResource("11_t8vtq")]
+position = Vector2(207, 146)
 
-[node name="Sodaz2" parent="." instance=ExtResource("20_ovcmj")]
-position = Vector2(278, 156)
+[node name="Fries" parent="." instance=ExtResource("14_xnncp")]
+position = Vector2(231, 124)
 
-[node name="Sodaz3" parent="." instance=ExtResource("20_ovcmj")]
-position = Vector2(189, 156)
+[node name="Fries2" parent="." instance=ExtResource("14_xnncp")]
+position = Vector2(188, 103)
 
 [node name="LevelEnd" parent="." instance=ExtResource("10_d18o5")]
 position = Vector2(541, 139)
@@ -308,6 +309,9 @@ theme_override_font_sizes/font_size = 8
 text = "0"
 script = ExtResource("ammo_display_script")
 ammo_type = "carrots"
+
+[node name="Burger2" parent="." instance=ExtResource("11_t8vtq")]
+position = Vector2(169, 146)
 
 [editable path="LevelEnd"]
 [editable path="MovingPlatform"]

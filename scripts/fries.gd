@@ -7,6 +7,9 @@ enum FriesState {
 }
 
 const SPINNING_PROJECT = preload("res://entities/tomato.tscn")
+const APPLE_COLLECTIBLE = preload("res://entities/apple_collectible.tscn")
+const CARROT_COLLECTIBLE = preload("res://entities/carrot_collectible.tscn")
+const LIFE_COLLECTIBLE = preload("res://entities/life_collectible.tscn")
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $Hitbox
@@ -136,6 +139,7 @@ func take_damage(damage = 100):
 	print("[FRIES] Took ", damage, " damage. Health: ", health, "/", MAX_HEALTH)
 	
 	if health <= 0:
+		drop_item()
 		go_to_hurt_state()
 	else:
 		# Piscar para indicar dano
@@ -143,6 +147,28 @@ func take_damage(damage = 100):
 		await get_tree().create_timer(0.1).timeout
 		modulate = Color(1, 1, 1)
 	
+func drop_item():
+	# 30% de chance de dropar vida
+	if randf() < 0.3:
+		var life = LIFE_COLLECTIBLE.instantiate()
+		get_parent().add_child(life)
+		life.global_position = global_position
+		print("[FRIES] Dropou vida na posição: ", global_position)
+		return
+	
+	# 75% de chance de dropar apple ou carrot
+	if randf() < 0.75:
+		var item
+		if randf() < 0.5:
+			item = APPLE_COLLECTIBLE.instantiate()
+			print("[FRIES] Dropou apple na posição: ", global_position)
+		else:
+			item = CARROT_COLLECTIBLE.instantiate()
+			print("[FRIES] Dropou carrot na posição: ", global_position)
+		
+		get_parent().add_child(item)
+		item.global_position = global_position
+
 func throw_tomato():
 	var new_tomato = SPINNING_PROJECT.instantiate()
 	add_sibling(new_tomato)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4kqwj5xbfgxi"]
+
+[ext_resource type="Script" uid="uid://csksjhhwepua3" path="res://scripts/life_collectible.gd" id="1_cj8g3"]
+[ext_resource type="Texture2D" uid="uid://bul728afcma7d" path="res://sprites/Seasonal Tilesets/7 - Hud/hearts_hud.png" id="2_37avk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_apple"]
+radius = 6.0
+
+[node name="Lifeollectible" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_cj8g3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_apple")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.98023e-08, 2.98023e-08)
+scale = Vector2(0.6875, 0.6875)
+texture = ExtResource("2_37avk")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

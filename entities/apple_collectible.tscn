@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqm8xj2k5nfpa"]
+
+[ext_resource type="Script" path="res://scripts/apple_collectible.gd" id="1_apple"]
+[ext_resource type="Texture2D" uid="uid://x0xywg1ijdvs" path="res://sprites/General Tiles/Fruit+.png" id="2_apple"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_apple"]
+radius = 6.0
+
+[node name="AppleCollectible" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_apple")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_apple")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_apple")
+region_enabled = true
+region_rect = Rect2(0, 16, 16, 16)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

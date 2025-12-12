@@ -8,6 +8,7 @@ enum SodazState {
 
 const SODA_BUBBLE = preload("res://entities/soda_bubble.tscn")
 const WATER_BOTTLE = preload("res://entities/water_bottle.tscn")
+const LIFE_COLLECTIBLE = preload("res://entities/life_collectible.tscn")
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $Hitbox
@@ -146,6 +147,14 @@ func take_damage(damage = 100):
 		modulate = Color(1, 1, 1)
 
 func drop_water_bottle():
+	# 30% de chance de dropar vida
+	if randf() < 0.3:
+		var life = LIFE_COLLECTIBLE.instantiate()
+		get_parent().add_child(life)
+		life.global_position = global_position
+		print("[SODAZ] Dropou vida na posição: ", global_position)
+		return
+	
 	# 40% de chance de dropar water bottle
 	if randf() < 0.4:
 		var bottle = WATER_BOTTLE.instantiate()
