@@ -166,13 +166,13 @@ limit_bottom = 368
 [node name="Player" parent="." instance=ExtResource("1_bmxgx")]
 position = Vector2(43, 161)
 
-[node name="Burger" parent="." instance=ExtResource("11_t8vtq")]
+[node name="Burger" parent="." groups=["Enemies"] instance=ExtResource("11_t8vtq")]
 position = Vector2(296, 157)
 
-[node name="Boss" parent="." instance=ExtResource("16_mjtd1")]
+[node name="Boss" parent="." groups=["Enemies"] instance=ExtResource("16_mjtd1")]
 position = Vector2(212, 132)
 
-[node name="Fries" parent="." instance=ExtResource("14_xnncp")]
+[node name="Fries" parent="." groups=["Enemies"] instance=ExtResource("14_xnncp")]
 
 [node name="LevelEnd" parent="." instance=ExtResource("10_d18o5")]
 position = Vector2(541, 139)

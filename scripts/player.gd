@@ -16,6 +16,7 @@ enum PlayerState {
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var left_wall_detector: RayCast2D = $LeftWallDetector
 @onready var right_wall_detector: RayCast2D = $RightWallDetector
+@onready var projectile_spawn: Marker2D = $ProjectileSpawn
 
 @onready var reload_timer: Timer = $ReloadTimer
 
@@ -48,6 +49,10 @@ func _physics_process(delta: float) -> void:
 		invincibility_timer -= delta
 		if invincibility_timer <= 0:
 			is_invincible = false
+	
+	# Arremessar maçã com botão esquerdo do mouse
+	if Input.is_action_just_pressed("shoot"):
+		throw_apple()
 	
 	match status:
 		PlayerState.idle:
@@ -257,12 +262,20 @@ func set_large_collider():
 	hitbox_collision_shape.position.y = 0.5
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
+	# Ignorar projéteis disparados pelo próprio player
+	if area.is_in_group("PlayerProjectile"):
+		return
+	
 	if area.is_in_group("Enemies"):
 		hit_enemy(area)
 	elif area.is_in_group("LethalArea"):
 		hit_lethal_area()
 		
 func _on_hitbox_body_entered(body: Node2D) -> void:
+	# Ignorar projéteis disparados pelo próprio player
+	if body.is_in_group("PlayerProjectile"):
+		return
+	
 	if body.is_in_group("LethalArea"):
 		go_to_dead_state()
 
@@ -303,6 +316,24 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Water"):
 		jump_count = 0
 		go_to_jump_state()
+
+func throw_apple():
+	var apple_scene = load("res://entities/apple.tscn")
+	var apple = apple_scene.instantiate()
+	add_sibling(apple)
+	
+	# Determinar direção baseada no flip do sprite
+	var throw_direction = -1 if anim.flip_h else 1
+	
+	# Ajustar posição do spawn baseado na direção
+	var spawn_offset = projectile_spawn.position
+	if anim.flip_h:  # Virado para esquerda
+		spawn_offset.x = -abs(spawn_offset.x)
+	else:  # Virado para direita
+		spawn_offset.x = abs(spawn_offset.x)
+	
+	apple.global_position = global_position + spawn_offset
+	apple.set_direction(throw_direction)
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "getting hit":
