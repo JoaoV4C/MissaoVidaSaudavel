@@ -61,4 +61,4 @@ func _advance_slide():
 
 
 func _start_game():
-	get_tree().change_scene_to_file("res://scene/tropic.tscn")
+	get_tree().change_scene_to_file("res://scene/main_game.tscn")
