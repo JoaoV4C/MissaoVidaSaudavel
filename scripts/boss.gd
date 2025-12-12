@@ -16,10 +16,10 @@ const SPINNING_PROJECT = preload("res://entities/tomato.tscn")
 
 const SPEED = 30.0
 const CHASE_SPEED = 50.0
-const DETECTION_RANGE = 150.0
-const ATTACK_DISTANCE = 60.0
+const DETECTION_RANGE = 300.0
+const ATTACK_DISTANCE = 120.0
 const MIN_DISTANCE = 15.0
-const ATTACK_COOLDOWN = 3.0
+const ATTACK_COOLDOWN = 1.0
 const JUMP_VELOCITY = -400.0
 
 var status: BossState
