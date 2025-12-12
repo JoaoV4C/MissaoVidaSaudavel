@@ -13,7 +13,7 @@ func _ready():
 
 func update_text():
 	if wave_manager:
-		text = "Onda " + str(wave_manager.current_wave) + "/5"
+		text = "Onda " + str(wave_manager.current_wave) + "/6"
 
 func _on_wave_completed():
 	await get_tree().create_timer(0.5).timeout

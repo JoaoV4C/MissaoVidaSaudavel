@@ -17,11 +17,12 @@ var spawn_points = []
 
 # Configuração das ondas: [burgers, fries, sodaz, boss]
 var waves = [
-	{"burgers": 3, "fries": 2, "sodaz": 1, "boss": 0},  # Onda 1
-	{"burgers": 4, "fries": 3, "sodaz": 1, "boss": 0},  # Onda 2
-	{"burgers": 5, "fries": 4, "sodaz": 2, "boss": 0},  # Onda 3
-	{"burgers": 6, "fries": 5, "sodaz": 3, "boss": 0},  # Onda 4
-	{"burgers": 3, "fries": 3, "sodaz": 2, "boss": 1}   # Onda 5 (com boss)
+	{"burgers": 1, "fries": 0, "sodaz": 0, "boss": 0},  # Onda 1
+	{"burgers": 3, "fries": 2, "sodaz": 1, "boss": 0},  # Onda 2
+	{"burgers": 4, "fries": 3, "sodaz": 1, "boss": 0},  # Onda 3
+	{"burgers": 5, "fries": 4, "sodaz": 2, "boss": 0},  # Onda 4
+	{"burgers": 6, "fries": 5, "sodaz": 3, "boss": 0},  # Onda 5
+	{"burgers": 3, "fries": 3, "sodaz": 2, "boss": 1}   # Onda 6 (com boss)
 ]
 
 func _ready():

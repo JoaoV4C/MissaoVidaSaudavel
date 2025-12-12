@@ -1,5 +1,7 @@
 extends Area2D
 
+const ITEM_POPUP = preload("res://entities/item_popup.tscn")
+
 func _ready():
 	add_to_group("CarrotCollectible")
 
@@ -15,4 +17,15 @@ func _on_body_entered(body: Node2D) -> void:
 func collect(_player):
 	Globals.carrots += 1
 	print("[CARROT_COLLECTIBLE] Coletado! Cenouras: ", Globals.carrots)
+	
+	# Verificar se é a primeira vez
+	if not Globals.first_carrot_collected:
+		Globals.first_carrot_collected = true
+		show_item_popup()
+	
 	queue_free()
+
+func show_item_popup():
+	var popup = ITEM_POPUP.instantiate()
+	get_tree().root.add_child(popup)
+	popup.show_item("carrot")
