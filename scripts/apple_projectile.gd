@@ -61,9 +61,9 @@ func explode():
 			# Inimigo está dentro da área de explosão
 			var enemy = enemy_hitbox.get_parent()
 			if enemy and enemy.has_method("take_damage"):
-				enemy.take_damage()
+				enemy.take_damage(50)
 				enemies_killed += 1
-				print("[APPLE] Dano de explosão causado ao inimigo! Distância: ", distance)
+				print("[APPLE] Causou 50 de dano ao inimigo! Distância: ", distance)
 	
 	print("[APPLE] Explosão matou ", enemies_killed, " inimigo(s)")
 

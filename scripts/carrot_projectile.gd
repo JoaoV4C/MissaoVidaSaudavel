@@ -39,8 +39,8 @@ func _on_area_entered(area: Area2D) -> void:
 		has_hit = true
 		var enemy = area.get_parent()
 		if enemy and enemy.has_method("take_damage"):
-			enemy.take_damage()
-			print("[CARROT] Dano causado ao inimigo!")
+			enemy.take_damage(100)
+			print("[CARROT] Causou 100 de dano ao inimigo!")
 		queue_free()
 		return
 

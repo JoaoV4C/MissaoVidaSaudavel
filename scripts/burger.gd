@@ -28,6 +28,8 @@ var direction = 1
 var can_throw = true
 var attack_cooldown_timer = 0.0
 var player: CharacterBody2D = null
+var health = 200
+const MAX_HEALTH = 200
 
 func _ready() -> void:
 	anim.flip_h = true
@@ -130,8 +132,17 @@ func attack_state(_delta):
 func hurt_state(_delta):
 	pass
 	
-func take_damage():
-	go_to_hurt_state()
+func take_damage(damage = 100):
+	health -= damage
+	print("[BURGER] Took ", damage, " damage. Health: ", health, "/", MAX_HEALTH)
+	
+	if health <= 0:
+		go_to_hurt_state()
+	else:
+		# Piscar para indicar dano
+		modulate = Color(1, 0.5, 0.5)
+		await get_tree().create_timer(0.1).timeout
+		modulate = Color(1, 1, 1)
 	
 func throw_tomato():
 	var new_tomato = SPINNING_PROJECT.instantiate()
