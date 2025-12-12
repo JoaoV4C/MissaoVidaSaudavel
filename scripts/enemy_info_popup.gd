@@ -47,7 +47,7 @@ func get_enemy_data(enemy_type: String) -> Dictionary:
 			"texture_uid": "uid://cmrbbe3gudir",
 			"subtitle": "O Vicio do Sal e do Carboidrato",
 			"description": "Representa o pico de energia momentaneo, seguido de uma queda brusca (ou a dificuldade em resistir ao impulso).",
-			"attack": "Arremesso de Sal. Lanca um punhado de batatas fritas individuais que voam rapidamente."
+			"attack": "Arremesso de Sal. Lanca um punhado de batatas fritas individuais."
 		},
 		"sodaz": {
 			"name": "Sodaz",
