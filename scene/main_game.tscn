@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dol6aewxs6gs6"]
+[gd_scene load_steps=24 format=4 uid="uid://dol6aewxs6gs6"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_main"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_main"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://knb4sdbmoc8x" path="res://scripts/wave_manager.gd" id="10_main"]
 [ext_resource type="Texture2D" uid="uid://bisx3qseefq0j" path="res://sprites/Seasonal Tilesets/7 - Hud/apple_hud.png" id="11_main"]
 [ext_resource type="Texture2D" uid="uid://2keardv4cidw" path="res://sprites/Seasonal Tilesets/7 - Hud/healthbarUnder.png" id="12_main"]
-[ext_resource type="PackedScene" uid="uid://7dkaekrflgga" path="res://entities/moving_platform.tscn" id="13_frmc1"]
 [ext_resource type="Texture2D" uid="uid://2ep5330sou7q" path="res://sprites/Seasonal Tilesets/7 - Hud/lightning.png" id="13_main"]
 [ext_resource type="FontFile" uid="uid://dlo5r8y4er47f" path="res://fonts/pixelmix.ttf" id="14_main"]
 [ext_resource type="Texture2D" uid="uid://cqua7p3ba3sss" path="res://sprites/Seasonal Tilesets/7 - Hud/healthbarProgress.png" id="15_main"]
@@ -214,20 +213,6 @@ script = ExtResource("22_main")
 position = Vector2(800, 144)
 script = ExtResource("22_main")
 
-[node name="MovingPlatform" parent="." instance=ExtResource("13_frmc1")]
-position = Vector2(55, 137)
-time = 3
-
-[node name="Target" parent="MovingPlatform" index="1"]
-position = Vector2(0, -129)
-
-[node name="MovingPlatform2" parent="." instance=ExtResource("13_frmc1")]
-position = Vector2(255, -57)
-time = 2
-
-[node name="Target" parent="MovingPlatform2" index="1"]
-position = Vector2(158, 0)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="control" type="Control" parent="CanvasLayer"]
@@ -352,6 +337,3 @@ theme_override_font_sizes/font_size = 10
 text = "Onda 1/5"
 horizontal_alignment = 1
 script = ExtResource("23_main")
-
-[editable path="MovingPlatform"]
-[editable path="MovingPlatform2"]
