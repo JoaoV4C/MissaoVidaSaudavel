@@ -24,6 +24,10 @@ const GAME_SCENE_PATH = "res://scenes/main_game.tscn"
 func _ready():
 	# Inicializa a apresentação com o primeiro slide
 	_display_current_slide()
+	
+	# Configurar mensagem do botão
+	if button_prompt:
+		button_prompt.text = "Pressione ESPACO para avancar"
 
 
 func _input(event):
