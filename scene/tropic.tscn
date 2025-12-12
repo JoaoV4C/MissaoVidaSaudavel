@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://c8yhqpob56plw"]
+[gd_scene load_steps=24 format=4 uid="uid://c8yhqpob56plw"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_bmxgx"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_ry6l7"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://c5ycduh7qn7la" path="res://entities/boss.tscn" id="16_mjtd1"]
 [ext_resource type="Texture2D" uid="uid://cqua7p3ba3sss" path="res://sprites/Seasonal Tilesets/7 - Hud/healthbarProgress.png" id="17_kajwn"]
 [ext_resource type="Texture2D" uid="uid://cbl0dfghm2m3t" path="res://sprites/Seasonal Tilesets/7 - Hud/carrot.png" id="18_3eg8f"]
+[ext_resource type="Texture2D" uid="uid://bul728afcma7d" path="res://sprites/Seasonal Tilesets/7 - Hud/hearts_hud.png" id="19_uehjn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d18o5"]
 size = Vector2(20, 192)
@@ -223,35 +224,58 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/control/container"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/container"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/container/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/control/container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="energy" type="HBoxContainer" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/control/container/VBoxContainer/HBoxContainer"]
+[node name="energy_icon" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/energy"]
 layout_mode = 2
 texture = ExtResource("16_kajwn")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/control/container/VBoxContainer/HBoxContainer"]
+[node name="energy_bar" type="TextureProgressBar" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/energy"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture_under = ExtResource("16_b78wb")
 texture_over = ExtResource("17_kajwn")
 
-[node name="apples_container" type="HBoxContainer" parent="CanvasLayer/control/container/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_uehjn")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_uehjn")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_uehjn")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/control/container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="apples_container" type="HBoxContainer" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="apple_icon" type="TextureRect" parent="CanvasLayer/control/container/VBoxContainer/apples_container"]
+[node name="apple_icon" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer2/apples_container"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("15_mjtd1")
 
-[node name="apples" type="Label" parent="CanvasLayer/control/container/VBoxContainer/apples_container"]
+[node name="apples" type="Label" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer2/apples_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -259,18 +283,18 @@ theme_override_fonts/font = ExtResource("16_kjkl5")
 theme_override_font_sizes/font_size = 8
 text = "0"
 
-[node name="carrots_container" type="HBoxContainer" parent="CanvasLayer/control/container/VBoxContainer"]
+[node name="carrots_container" type="HBoxContainer" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="carrot_icon" type="TextureRect" parent="CanvasLayer/control/container/VBoxContainer/carrots_container"]
+[node name="carrot_icon" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer2/carrots_container"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("18_3eg8f")
 
-[node name="carrot" type="Label" parent="CanvasLayer/control/container/VBoxContainer/carrots_container"]
+[node name="carrot" type="Label" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer2/carrots_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3

@@ -21,10 +21,10 @@ enum PlayerState {
 @onready var reload_timer: Timer = $ReloadTimer
 
 @export var max_speed = 180.0
-@export var acceleration = 400
-@export var deceleration = 400
-@export var wall_acceleration = 40
-@export var wall_jump_velocity = 240
+@export var acceleration = 400.0
+@export var deceleration = 400.0
+@export var wall_acceleration = 40.0
+@export var wall_jump_velocity = 240.0
 @export var water_max_speed = 100
 @export var water_acceleration = 200
 @export var water_jump_force = -100
@@ -45,9 +45,14 @@ enum ProjectileType {
 	CARROT
 }
 var current_projectile = ProjectileType.APPLE
+var throw_cooldown = 0.0
+const THROW_COOLDOWN_DURATION = 0.5
 		
 func _ready() -> void:
 	go_to_idle_state()
+	# Quantidade inicial de munição
+	Globals.apples = 10
+	Globals.carrots = 10
 
 func _physics_process(delta: float) -> void:
 	# Atualizar timer de invencibilidade
@@ -56,12 +61,16 @@ func _physics_process(delta: float) -> void:
 		if invincibility_timer <= 0:
 			is_invincible = false
 	
+	# Atualizar cooldown de arremesso
+	if throw_cooldown > 0:
+		throw_cooldown -= delta
+	
 	# Alternar tipo de projétil com Q
 	if Input.is_action_just_pressed("switch_weapon"):  # Tecla Q
 		toggle_projectile()
 	
 	# Arremessar projétil com botão esquerdo do mouse
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and throw_cooldown <= 0:
 		throw_projectile()
 	
 	match status:
@@ -336,15 +345,29 @@ func toggle_projectile():
 		print("[PLAYER] Trocou para APPLE")
 
 func throw_projectile():
+	# Verificar se tem munição disponível
+	if current_projectile == ProjectileType.APPLE:
+		if Globals.apples <= 0:
+			print("[PLAYER] Sem maçãs disponíveis!")
+			return
+	else:  # CARROT
+		if Globals.carrots <= 0:
+			print("[PLAYER] Sem cenouras disponíveis!")
+			return
+	
 	var projectile_scene
 	var projectile_script
 	
 	# Selecionar cena e script baseado no tipo atual
 	if current_projectile == ProjectileType.APPLE:
 		projectile_scene = load("res://entities/apple.tscn")
+		Globals.apples -= 1
+		print("[PLAYER] Maçãs restantes: ", Globals.apples)
 	else:  # CARROT
 		projectile_scene = load("res://entities/carrot.tscn")
 		projectile_script = load("res://scripts/carrot_projectile.gd")
+		Globals.carrots -= 1
+		print("[PLAYER] Cenouras restantes: ", Globals.carrots)
 	
 	var projectile = projectile_scene.instantiate()
 	add_sibling(projectile)
@@ -365,6 +388,9 @@ func throw_projectile():
 	
 	projectile.global_position = global_position + spawn_offset
 	projectile.set_direction(throw_direction)
+	
+	# Iniciar cooldown
+	throw_cooldown = THROW_COOLDOWN_DURATION
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "getting hit":
