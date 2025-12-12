@@ -50,9 +50,6 @@ const THROW_COOLDOWN_DURATION = 0.5
 		
 func _ready() -> void:
 	go_to_idle_state()
-	# Quantidade inicial de munição
-	Globals.apples = 10
-	Globals.carrots = 10
 
 func _physics_process(delta: float) -> void:
 	# Atualizar timer de invencibilidade
