@@ -25,6 +25,7 @@ func show_game_over():
 	Globals.apples = 10
 	Globals.carrots = 10
 	Globals.energy = 100
+	Globals.lifes = 3
 	
 	# Resetar flags de primeira coleta
 	Globals.first_apple_collected = false

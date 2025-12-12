@@ -13,9 +13,9 @@ func _on_body_entered(body: Node2D) -> void:
 		collect(body)
 
 func collect(player):
-	if player.health < 3:
+	if player.health < player.MAX_HEALTH:
 		player.health += 1
-		print("[LIFE_COLLECTIBLE] Coletado! Health: ", player.health)
+		print("[LIFE_COLLECTIBLE] Coletado! Health: ", player.health, "/", player.MAX_HEALTH)
 		queue_free()
 	else:
-		print("[LIFE_COLLECTIBLE] Vida já está no máximo!")
+		print("[LIFE_COLLECTIBLE] Vida já está no máximo! (", player.MAX_HEALTH, ")")

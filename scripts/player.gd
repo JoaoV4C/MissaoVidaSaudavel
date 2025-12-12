@@ -34,6 +34,7 @@ const ENEMY_INFO_POPUP = preload("res://entities/enemy_info_popup.tscn")
 @export var water_jump_force = -100
 
 const JUMP_VELOCITY = -300.0
+const MAX_HEALTH = 6
 
 var jump_count = 0
 @export var max_jump_count = 2

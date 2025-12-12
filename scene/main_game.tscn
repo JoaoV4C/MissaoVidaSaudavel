@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dol6aewxs6gs6"]
+[gd_scene load_steps=25 format=4 uid="uid://dol6aewxs6gs6"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_main"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_main"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://c4bgaews4xbgy" path="res://scripts/weapon_selector_ui.gd" id="21_main"]
 [ext_resource type="Script" uid="uid://dc84qkhca6hej" path="res://scripts/spawn_point.gd" id="22_main"]
 [ext_resource type="Script" uid="uid://c8wj0f5wmxtgf" path="res://scripts/wave_label.gd" id="23_main"]
+[ext_resource type="PackedScene" uid="uid://c4kqwj5xbfgxi" path="res://entities/life_collectible.tscn" id="24_6xmtq"]
 
 [node name="MainGame" type="Node2D"]
 metadata/_edit_vertical_guides_ = [520.0]
@@ -274,6 +275,18 @@ texture = ExtResource("17_main")
 layout_mode = 2
 texture = ExtResource("17_main")
 
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_main")
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_main")
+
+[node name="TextureRect6" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_main")
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/control/container/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -337,3 +350,6 @@ theme_override_font_sizes/font_size = 10
 text = "Onda 1/5"
 horizontal_alignment = 1
 script = ExtResource("23_main")
+
+[node name="Lifeollectible" parent="." instance=ExtResource("24_6xmtq")]
+position = Vector2(128, 154)
