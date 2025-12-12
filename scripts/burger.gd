@@ -29,7 +29,7 @@ var status: BurgerState
 
 var direction = 1
 var can_throw = true
-var attack_cooldown_timer = 0.0
+var attack_cooldown_timer = 1.5  # Cooldown inicial de 1.5s
 var player: CharacterBody2D = null
 var health = 200
 const MAX_HEALTH = 200

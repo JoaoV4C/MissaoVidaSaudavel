@@ -26,7 +26,7 @@ var status: BossState
 
 var direction = 1
 var can_throw = true
-var attack_cooldown_timer = 0.0
+var attack_cooldown_timer = 1.5  # Cooldown inicial de 1.5s
 var player: CharacterBody2D = null
 var health = 5000
 const MAX_HEALTH = 5000
