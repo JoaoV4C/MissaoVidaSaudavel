@@ -39,6 +39,12 @@ var health = 3
 var is_invincible = false
 var invincibility_timer = 0.0
 const INVINCIBILITY_DURATION = 1.0
+
+enum ProjectileType {
+	APPLE,
+	CARROT
+}
+var current_projectile = ProjectileType.APPLE
 		
 func _ready() -> void:
 	go_to_idle_state()
@@ -50,9 +56,13 @@ func _physics_process(delta: float) -> void:
 		if invincibility_timer <= 0:
 			is_invincible = false
 	
-	# Arremessar maçã com botão esquerdo do mouse
+	# Alternar tipo de projétil com Q
+	if Input.is_action_just_pressed("switch_weapon"):  # Tecla Q
+		toggle_projectile()
+	
+	# Arremessar projétil com botão esquerdo do mouse
 	if Input.is_action_just_pressed("shoot"):
-		throw_apple()
+		throw_projectile()
 	
 	match status:
 		PlayerState.idle:
@@ -317,10 +327,31 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 		jump_count = 0
 		go_to_jump_state()
 
-func throw_apple():
-	var apple_scene = load("res://entities/apple.tscn")
-	var apple = apple_scene.instantiate()
-	add_sibling(apple)
+func toggle_projectile():
+	if current_projectile == ProjectileType.APPLE:
+		current_projectile = ProjectileType.CARROT
+		print("[PLAYER] Trocou para CARROT")
+	else:
+		current_projectile = ProjectileType.APPLE
+		print("[PLAYER] Trocou para APPLE")
+
+func throw_projectile():
+	var projectile_scene
+	var projectile_script
+	
+	# Selecionar cena e script baseado no tipo atual
+	if current_projectile == ProjectileType.APPLE:
+		projectile_scene = load("res://entities/apple.tscn")
+	else:  # CARROT
+		projectile_scene = load("res://entities/carrot.tscn")
+		projectile_script = load("res://scripts/carrot_projectile.gd")
+	
+	var projectile = projectile_scene.instantiate()
+	add_sibling(projectile)
+	
+	# Aplicar script da cenoura se necessário
+	if current_projectile == ProjectileType.CARROT:
+		projectile.set_script(projectile_script)
 	
 	# Determinar direção baseada no flip do sprite
 	var throw_direction = -1 if anim.flip_h else 1
@@ -332,8 +363,8 @@ func throw_apple():
 	else:  # Virado para direita
 		spawn_offset.x = abs(spawn_offset.x)
 	
-	apple.global_position = global_position + spawn_offset
-	apple.set_direction(throw_direction)
+	projectile.global_position = global_position + spawn_offset
+	projectile.set_direction(throw_direction)
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "getting hit":
