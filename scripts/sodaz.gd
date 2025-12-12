@@ -155,8 +155,8 @@ func drop_water_bottle():
 		print("[SODAZ] Dropou vida na posição: ", global_position)
 		return
 	
-	# 40% de chance de dropar water bottle
-	if randf() < 0.4:
+	# 60% de chance de dropar water bottle
+	if randf() < 0.6:
 		var bottle = WATER_BOTTLE.instantiate()
 		get_parent().add_child(bottle)
 		bottle.global_position = global_position
@@ -173,3 +173,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "attack":
 		go_to_walk_state()
 		return
+	if anim.animation == "hurt":
+		queue_free()

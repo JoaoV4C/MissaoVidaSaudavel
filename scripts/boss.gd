@@ -158,3 +158,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "attack":
 		go_to_walk_state()
 		return
+	if anim.animation == "hurt":
+		queue_free()

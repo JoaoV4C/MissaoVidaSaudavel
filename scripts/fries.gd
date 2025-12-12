@@ -158,16 +158,22 @@ func drop_item():
 	
 	# 75% de chance de dropar apple ou carrot
 	if randf() < 0.75:
-		var item
-		if randf() < 0.5:
-			item = APPLE_COLLECTIBLE.instantiate()
-			print("[FRIES] Dropou apple na posição: ", global_position)
-		else:
-			item = CARROT_COLLECTIBLE.instantiate()
-			print("[FRIES] Dropou carrot na posição: ", global_position)
+		var is_apple = randf() < 0.5
+		var count = 5 if is_apple else 3
 		
-		get_parent().add_child(item)
-		item.global_position = global_position
+		for i in range(count):
+			var item
+			if is_apple:
+				item = APPLE_COLLECTIBLE.instantiate()
+			else:
+				item = CARROT_COLLECTIBLE.instantiate()
+			
+			get_parent().add_child(item)
+			# Offset aleatório para não ficar tudo no mesmo lugar
+			var offset = Vector2(randf_range(-20, 20), randf_range(-10, 10))
+			item.global_position = global_position + offset
+		
+		print("[FRIES] Dropou ", count, " ", "apples" if is_apple else "carrots", " na posição: ", global_position)
 
 func throw_tomato():
 	var new_tomato = SPINNING_PROJECT.instantiate()
@@ -180,3 +186,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "attack":
 		go_to_walk_state()
 		return
+	if anim.animation == "hurt":
+		queue_free()

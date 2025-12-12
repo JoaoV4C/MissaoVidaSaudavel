@@ -1,0 +1,244 @@
+[gd_scene load_steps=23 format=4 uid="uid://7vpqj6ummoqr"]
+
+[ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_main"]
+[ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_main"]
+[ext_resource type="TileSet" uid="uid://ckf2afy4m5an6" path="res://tiles/decoration.tres" id="3_main"]
+[ext_resource type="Texture2D" uid="uid://ca6wptqg1wg24" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/5 - Sky_color.png" id="4_main"]
+[ext_resource type="Texture2D" uid="uid://tsqqufbk23of" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/4 - Floating_clouds.png" id="5_main"]
+[ext_resource type="Texture2D" uid="uid://bxlggdi5ar5v2" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/3 - Background_clouds.png" id="6_main"]
+[ext_resource type="Texture2D" uid="uid://03troodjjnh3" path="res://sprites/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="7_main"]
+[ext_resource type="Texture2D" uid="uid://8clgcsqv5vkj" path="res://sprites/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="8_main"]
+[ext_resource type="PackedScene" uid="uid://cdtr6sp6pckop" path="res://entities/camera.tscn" id="9_main"]
+[ext_resource type="Script" uid="uid://knb4sdbmoc8x" path="res://scripts/wave_manager.gd" id="10_main"]
+[ext_resource type="Texture2D" uid="uid://bisx3qseefq0j" path="res://sprites/Seasonal Tilesets/7 - Hud/apple_hud.png" id="11_main"]
+[ext_resource type="Texture2D" uid="uid://2keardv4cidw" path="res://sprites/Seasonal Tilesets/7 - Hud/healthbarUnder.png" id="12_main"]
+[ext_resource type="Texture2D" uid="uid://2ep5330sou7q" path="res://sprites/Seasonal Tilesets/7 - Hud/lightning.png" id="13_main"]
+[ext_resource type="FontFile" uid="uid://dlo5r8y4er47f" path="res://fonts/pixelmix.ttf" id="14_main"]
+[ext_resource type="Texture2D" uid="uid://cqua7p3ba3sss" path="res://sprites/Seasonal Tilesets/7 - Hud/healthbarProgress.png" id="15_main"]
+[ext_resource type="Texture2D" uid="uid://cbl0dfghm2m3t" path="res://sprites/Seasonal Tilesets/7 - Hud/carrot.png" id="16_main"]
+[ext_resource type="Texture2D" uid="uid://bul728afcma7d" path="res://sprites/Seasonal Tilesets/7 - Hud/hearts_hud.png" id="17_main"]
+[ext_resource type="Script" uid="uid://2wiujebc8t6s" path="res://scripts/ammo_display.gd" id="18_main"]
+[ext_resource type="Script" uid="uid://btbt1vv6as2jn" path="res://scripts/energy_bar.gd" id="19_main"]
+[ext_resource type="Script" uid="uid://dfkv1b2fk8lgc" path="res://scripts/hp_container.gd" id="20_main"]
+[ext_resource type="Script" uid="uid://c4bgaews4xbgy" path="res://scripts/weapon_selector_ui.gd" id="21_main"]
+[ext_resource type="Script" uid="uid://dc84qkhca6hej" path="res://scripts/spawn_point.gd" id="22_main"]
+
+[node name="MainGame" type="Node2D"]
+
+[node name="WaveManager" type="Node" parent="." groups=["WaveManager"]]
+script = ExtResource("10_main")
+
+[node name="TileMaps" type="Node" parent="."]
+
+[node name="Terrain" type="TileMapLayer" parent="TileMaps"]
+tile_map_data = PackedByteArray("AAAFAAkAAAAEAAEAAAAAAAoAAAAEAAEAAAABAAoAAAAEAAIAAAACAAoAAAAEAAIAAAADAAoAAAAEAAIAAAAEAAoAAAAEAAIAAAAFAAoAAAAEAAIAAAAGAAoAAAAEAAIAAAAHAAoAAAAEAAIAAAAIAAoAAAAEAAIAAAAJAAoAAAAEAAIAAAAKAAoAAAAEAAIAAAALAAoAAAAEAAIAAAAMAAoAAAAEAAIAAAANAAoAAAAEAAIAAAAOAAoAAAAEAAIAAAAPAAoAAAAEAAIAAAAQAAoAAAAEAAIAAAARAAoAAAAEAAIAAAASAAoAAAAEAAIAAAATAAoAAAAEAAIAAAAUAAoAAAAEAAIAAAAVAAoAAAAEAAIAAAAWAAoAAAAEAAIAAAAXAAoAAAAEAAIAAAAYAAoAAAAEAAIAAAAZAAoAAAAEAAIAAAAaAAoAAAAEAAIAAAAbAAoAAAAEAAIAAAAcAAoAAAAEAAIAAAAdAAoAAAAEAAIAAAAeAAoAAAAEAAIAAAAfAAoAAAAEAAIAAAAgAAoAAAAEAAIAAAAhAAoAAAAEAAIAAAAiAAoAAAAEAAIAAAAjAAoAAAAEAAIAAAAkAAoAAAAEAAIAAAAlAAoAAAAEAAIAAAAmAAoAAAAEAAIAAAAnAAoAAAAEAAIAAAAoAAoAAAAEAAIAAAApAAoAAAAEAAIAAAAqAAoAAAAEAAIAAAArAAoAAAAEAAIAAAAsAAoAAAAEAAIAAAAtAAoAAAAEAAIAAAAuAAoAAAAEAAIAAAAvAAoAAAAEAAIAAAAwAAoAAAAEAAIAAAAxAAoAAAAEAAIAAAAyAAoAAAAEAAIAAAAzAAoAAAAEAAIAAAA0AAoAAAAEAAIAAAA1AAoAAAAEAAIAAAA2AAoAAAAEAAIAAAA3AAoAAAAEAAIAAAA4AAoAAAAEAAIAAAA5AAoAAAAEAAIAAAA=")
+tile_set = ExtResource("2_main")
+
+[node name="Decoration" type="TileMapLayer" parent="TileMaps"]
+tile_map_data = PackedByteArray("AAAFAAgAAQAAAAAAAAAGAAgAAwABAAEAAAAQAAgAAAABAAUAAAAVAAgAAAAJAAEAAAAgAAgAAgAAAAAAAAA=")
+tile_set = ExtResource("3_main")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="5-Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -107)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/5-Sky"]
+texture_repeat = 2
+texture = ExtResource("4_main")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="4-Floating-clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -107)
+motion_scale = Vector2(0.1, 0.05)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/4-Floating-clouds"]
+texture_repeat = 2
+texture = ExtResource("5_main")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="4-Background-clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -107)
+motion_scale = Vector2(0.2, 0.1)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/4-Background-clouds"]
+texture_repeat = 2
+texture = ExtResource("6_main")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="2-Hills" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -107)
+motion_scale = Vector2(0.3, 0.15)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/2-Hills"]
+position = Vector2(0, -160)
+texture = ExtResource("7_main")
+centered = false
+offset = Vector2(0, 208)
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="1-Foreground" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -107)
+motion_scale = Vector2(0.4, 0.2)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/1-Foreground"]
+position = Vector2(0, -461)
+scale = Vector2(1, 1.83654)
+texture = ExtResource("8_main")
+centered = false
+offset = Vector2(0, 208)
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="Player" parent="." instance=ExtResource("1_main")]
+position = Vector2(80, 144)
+
+[node name="Camera2D" parent="Player" instance=ExtResource("9_main")]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints" groups=["SpawnPoint"]]
+position = Vector2(200, 144)
+script = ExtResource("22_main")
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints" groups=["SpawnPoint"]]
+position = Vector2(350, 144)
+script = ExtResource("22_main")
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints" groups=["SpawnPoint"]]
+position = Vector2(500, 144)
+script = ExtResource("22_main")
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints" groups=["SpawnPoint"]]
+position = Vector2(650, 144)
+script = ExtResource("22_main")
+
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints" groups=["SpawnPoint"]]
+position = Vector2(800, 144)
+script = ExtResource("22_main")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Container" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Container"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Container/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_main")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_main")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_main")
+script = ExtResource("20_main")
+
+[node name="EnergyBar" type="TextureProgressBar" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+texture_under = ExtResource("12_main")
+texture_progress = ExtResource("15_main")
+script = ExtResource("19_main")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_main")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+script = ExtResource("21_main")
+
+[node name="AppleContainer" type="HBoxContainer" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="AppleIcon" type="TextureRect" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer2/AppleContainer"]
+layout_mode = 2
+texture = ExtResource("11_main")
+
+[node name="AppleCount" type="Label" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer2/AppleContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("14_main")
+theme_override_font_sizes/font_size = 8
+text = "10"
+script = ExtResource("18_main")
+
+[node name="CarrotContainer" type="HBoxContainer" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="CarrotIcon" type="TextureRect" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer2/CarrotContainer"]
+layout_mode = 2
+texture = ExtResource("16_main")
+
+[node name="CarrotCount" type="Label" parent="CanvasLayer/Control/Container/HBoxContainer/VBoxContainer2/CarrotContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("14_main")
+theme_override_font_sizes/font_size = 8
+text = "10"
+script = ExtResource("18_main")
+ammo_type = "carrots"
+
+[node name="WaveLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 8.0
+offset_right = 20.0
+offset_bottom = 18.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("14_main")
+text = "Onda 1/5"
+horizontal_alignment = 1
