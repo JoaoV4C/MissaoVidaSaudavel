@@ -20,6 +20,8 @@ enum PlayerState {
 
 @onready var reload_timer: Timer = $ReloadTimer
 
+const GAME_OVER = preload("res://entities/game_over.tscn")
+
 @export var max_speed = 180.0
 @export var acceleration = 400.0
 @export var deceleration = 400.0
@@ -149,7 +151,11 @@ func go_to_dead_state():
 	status = PlayerState.dead
 	anim.play("dead")
 	velocity.x = 0
-	reload_timer.start()
+	
+	# Mostrar popup de game over
+	var game_over = GAME_OVER.instantiate()
+	get_tree().root.add_child(game_over)
+	game_over.show_game_over()
 
 func idle_state(delta):
 	apply_gravity(delta)
@@ -361,11 +367,8 @@ func take_damage():
 		go_to_hurt_state()
 
 func _on_reload_timer_timeout() -> void:
-	# Resetar munição e energia ao reiniciar a cena
-	Globals.apples = 10
-	Globals.carrots = 10
-	Globals.energy = 100
-	get_tree().reload_current_scene()
+	# Timer mantido para compatibilidade, mas não usado mais
+	pass
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Water"):
