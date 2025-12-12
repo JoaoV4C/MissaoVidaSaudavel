@@ -155,8 +155,8 @@ func drop_water_bottle():
 		print("[SODAZ] Dropou vida na posição: ", global_position)
 		return
 	
-	# 60% de chance de dropar water bottle
-	if randf() < 0.6:
+	# 100% de chance de dropar water bottle
+	if randf() < 1.0:
 		var bottle = WATER_BOTTLE.instantiate()
 		get_parent().add_child(bottle)
 		bottle.global_position = global_position
