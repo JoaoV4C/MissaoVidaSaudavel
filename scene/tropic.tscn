@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://c8yhqpob56plw"]
+[gd_scene load_steps=25 format=4 uid="uid://c8yhqpob56plw"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_bmxgx"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_ry6l7"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cqua7p3ba3sss" path="res://sprites/Seasonal Tilesets/7 - Hud/healthbarProgress.png" id="17_kajwn"]
 [ext_resource type="Texture2D" uid="uid://cbl0dfghm2m3t" path="res://sprites/Seasonal Tilesets/7 - Hud/carrot.png" id="18_3eg8f"]
 [ext_resource type="Texture2D" uid="uid://bul728afcma7d" path="res://sprites/Seasonal Tilesets/7 - Hud/hearts_hud.png" id="19_uehjn"]
+[ext_resource type="Script" uid="uid://dfkv1b2fk8lgc" path="res://scripts/hp_container.gd" id="hp_container_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d18o5"]
 size = Vector2(20, 192)
@@ -247,6 +248,7 @@ texture_over = ExtResource("17_kajwn")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+script = ExtResource("hp_container_script")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
