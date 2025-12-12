@@ -12,7 +12,7 @@ const SPINNING_PROJECT = preload("res://entities/tomato.tscn")
 @onready var hitbox: Area2D = $Hitbox
 @onready var wall_detector: RayCast2D = $WallDetector
 @onready var ground_detector: RayCast2D = $GroundDetector
-@onready var bone_start_position: Node2D = $BoneStartPosition
+@onready var tomato_start_position: Node2D = $TomatoStartPosition
 
 const SPEED = 30.0
 const CHASE_SPEED = 50.0
@@ -123,7 +123,7 @@ func walk_state(_delta):
 
 func attack_state(_delta):
 	if anim.frame == 2 && can_throw:
-		throw_bone()
+		throw_tomato()
 		can_throw = false
 
 func hurt_state(_delta):
@@ -132,11 +132,11 @@ func hurt_state(_delta):
 func take_damage():
 	go_to_hurt_state()
 	
-func throw_bone():
-	var new_bone = SPINNING_PROJECT.instantiate()
-	add_sibling(new_bone)
-	new_bone.position = bone_start_position.global_position
-	new_bone.set_direction(self.direction)
+func throw_tomato():
+	var new_tomato = SPINNING_PROJECT.instantiate()
+	add_sibling(new_tomato)
+	new_tomato.position = tomato_start_position.global_position
+	new_tomato.set_direction(self.direction)
 	attack_cooldown_timer = ATTACK_COOLDOWN
 	
 func _on_animated_sprite_2d_animation_finished() -> void:

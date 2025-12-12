@@ -184,7 +184,7 @@ position = Vector2(0, 13)
 target_position = Vector2(48, 0)
 collision_mask = 2
 
-[node name="BoneStartPosition" type="Node2D" parent="."]
+[node name="TomatoStartPosition" type="Node2D" parent="."]
 position = Vector2(13, -1)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
