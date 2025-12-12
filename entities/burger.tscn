@@ -192,6 +192,7 @@ animations = [{
 size = Vector2(12, 26)
 
 [node name="Burger" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_yag7t")
 

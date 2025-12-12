@@ -149,6 +149,7 @@ height = 50.0
 size = Vector2(29.6836, 33.75)
 
 [node name="Boss" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_chf21")
 

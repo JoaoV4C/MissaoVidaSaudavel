@@ -125,6 +125,7 @@ animations = [{
 size = Vector2(12, 26)
 
 [node name="Sodaz" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_m06ph")
 
