@@ -101,6 +101,31 @@ func get_random_spawn_position() -> Vector2:
 	if spawn_points.is_empty():
 		return Vector2.ZERO
 	
+	const MIN_DISTANCE = 50.0  # Distância mínima entre entidades
+	const MAX_ATTEMPTS = 10
+	
+	for attempt in range(MAX_ATTEMPTS):
+		var spawn_point = spawn_points.pick_random()
+		var pos = spawn_point.global_position
+		
+		# Verificar se está muito perto do player
+		var player = get_tree().get_first_node_in_group("Player")
+		if player and player.global_position.distance_to(pos) < MIN_DISTANCE:
+			continue
+		
+		# Verificar se está muito perto de outros inimigos
+		var too_close = false
+		var enemies = get_tree().get_nodes_in_group("Enemies")
+		for enemy_hitbox in enemies:
+			var enemy = enemy_hitbox.get_parent()
+			if enemy and enemy.global_position.distance_to(pos) < MIN_DISTANCE:
+				too_close = true
+				break
+		
+		if not too_close:
+			return pos
+	
+	# Se não encontrou posição boa após tentativas, retorna qualquer uma
 	var spawn_point = spawn_points.pick_random()
 	return spawn_point.global_position
 
