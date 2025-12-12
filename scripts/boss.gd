@@ -30,6 +30,7 @@ var attack_cooldown_timer = 0.0
 var player: CharacterBody2D = null
 var health = 5000
 const MAX_HEALTH = 5000
+var direction_change_cooldown = 0.0
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
@@ -43,6 +44,10 @@ func _physics_process(delta: float) -> void:
 	# Atualizar cooldown do ataque
 	if attack_cooldown_timer > 0:
 		attack_cooldown_timer -= delta
+	
+	# Atualizar cooldown de mudança de direção
+	if direction_change_cooldown > 0:
+		direction_change_cooldown -= delta
 		
 	match status:
 		BossState.walk:
@@ -115,13 +120,12 @@ func walk_state(_delta):
 		else:
 			velocity.x = 0
 		
-		if wall_detector.is_colliding():
-			scale.x *= -1
-			direction *= -1
-		
-		if not ground_detector.is_colliding():
-			scale.x *= -1
-			direction *= -1
+		# Só pode mudar de direção se o cooldown permitir
+		if direction_change_cooldown <= 0:
+			if wall_detector.is_colliding() or not ground_detector.is_colliding():
+				scale.x *= -1
+				direction *= -1
+				direction_change_cooldown = 0.5  # Cooldown de 0.5 segundo
 
 func attack_state(_delta):
 	if anim.frame == 2 && can_throw:
