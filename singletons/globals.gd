@@ -9,3 +9,5 @@ var energy := 100
 var first_apple_collected := false
 var first_carrot_collected := false
 var first_water_collected := false
+var first_enemy_dialogue_shown := false
+var first_boss_dialogue_shown := false

@@ -10,6 +10,7 @@ const FRIES = preload("res://entities/fries.tscn")
 const SODAZ = preload("res://entities/sodaz.tscn")
 const BOSS = preload("res://entities/boss.tscn")
 const LEVEL_INTRO = preload("res://entities/level_intro.tscn")
+const DIALOGUE_POPUP = preload("res://scene/dialogue_popup.tscn")
 
 var current_wave = 1
 var enemies_alive = 0
@@ -48,6 +49,11 @@ func show_level_intro():
 	intro.show_level_intro("Fase 1", "Entrada da Vila")
 	# Aguardar a intro terminar (2 segundos)
 	await get_tree().create_timer(2.0).timeout
+
+func show_first_enemy_dialogue():
+	var dialogue = DIALOGUE_POPUP.instantiate()
+	get_tree().root.add_child(dialogue)
+	await dialogue.show_dialogue("Ah, não! Isso é o que chamam de alimento ultraprocessado! Não vou deixar você me tirar a energia! Meu corpo é mais forte que isso!")
 
 func register_spawn_point(spawn_point: Marker2D):
 	spawn_points.append(spawn_point)

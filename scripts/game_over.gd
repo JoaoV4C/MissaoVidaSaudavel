@@ -30,6 +30,8 @@ func show_game_over():
 	Globals.first_apple_collected = false
 	Globals.first_carrot_collected = false
 	Globals.first_water_collected = false
+	Globals.first_enemy_dialogue_shown = false
+	Globals.first_boss_dialogue_shown = false
 	
 	# Recarregar cena
 	get_tree().reload_current_scene()

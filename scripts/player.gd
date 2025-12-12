@@ -21,6 +21,7 @@ enum PlayerState {
 @onready var reload_timer: Timer = $ReloadTimer
 
 const GAME_OVER = preload("res://entities/game_over.tscn")
+const DIALOGUE_POPUP = preload("res://scene/dialogue_popup.tscn")
 
 @export var max_speed = 180.0
 @export var acceleration = 400.0
@@ -66,6 +67,10 @@ func _physics_process(delta: float) -> void:
 	# Atualizar cooldown de arremesso
 	if throw_cooldown > 0:
 		throw_cooldown -= delta
+	
+	# Verificar inimigos próximos para mostrar diálogo
+	if not Globals.first_enemy_dialogue_shown:
+		check_nearby_enemies()
 	
 	# Alternar tipo de projétil com Q
 	if Input.is_action_just_pressed("switch_weapon"):  # Tecla Q
@@ -430,6 +435,42 @@ func throw_projectile():
 	
 	# Iniciar cooldown
 	throw_cooldown = THROW_COOLDOWN_DURATION
+
+func check_nearby_enemies():
+	var enemies = get_tree().get_nodes_in_group("Enemies")
+	for enemy_hitbox in enemies:
+		var enemy = enemy_hitbox.get_parent()
+		if enemy:
+			var distance = global_position.distance_to(enemy.global_position)
+			if distance <= 150.0:
+				# Verificar se o inimigo está visível na tela
+				var viewport = get_viewport()
+				var camera = get_viewport().get_camera_2d()
+				if camera:
+					var viewport_rect = viewport.get_visible_rect()
+					var camera_pos = camera.get_screen_center_position()
+					var screen_rect = Rect2(camera_pos - viewport_rect.size / 2, viewport_rect.size)
+					if screen_rect.has_point(enemy.global_position):
+						# Verificar se é o boss
+						var is_boss = enemy.get_script() and enemy.get_script().resource_path.contains("boss.gd")
+						if is_boss and not Globals.first_boss_dialogue_shown:
+							Globals.first_boss_dialogue_shown = true
+							show_boss_dialogue()
+							break
+						elif not is_boss and not Globals.first_enemy_dialogue_shown:
+							Globals.first_enemy_dialogue_shown = true
+							show_enemy_dialogue()
+							break
+
+func show_enemy_dialogue():
+	var dialogue = DIALOGUE_POPUP.instantiate()
+	get_tree().root.add_child(dialogue)
+	await dialogue.show_dialogue("Ah, nao! Isso e o que chamam de alimento ultraprocessado! Nao vou deixar voce me tirar a energia! Meu corpo e mais forte que isso!")
+
+func show_boss_dialogue():
+	var dialogue = DIALOGUE_POPUP.instantiate()
+	get_tree().root.add_child(dialogue)
+	await dialogue.show_dialogue("Voce e a maior e mais triste mentira da Vila Viva! Mas eu aprendi o segredo: quanto mais eu me cuido, mais forte eu fico! Agora, vou usar a minha energia limpa para acabar com essa sua poluicao!")
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "getting hit":

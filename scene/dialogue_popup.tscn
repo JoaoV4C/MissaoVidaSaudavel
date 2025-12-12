@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy5m8jvx1y3pf"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_popup.gd" id="1_dialogue"]
+[ext_resource type="FontFile" uid="uid://djsqvbxedlq1x" path="res://fonts/pixelmix.ttf" id="2_font"]
+
+[node name="DialoguePopup" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_dialogue")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="DialogueLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 10
+text = "Dialogue text here"
+autowrap_mode = 3
