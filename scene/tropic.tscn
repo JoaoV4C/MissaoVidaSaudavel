@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://c8yhqpob56plw"]
+[gd_scene load_steps=27 format=4 uid="uid://c8yhqpob56plw"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_bmxgx"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_ry6l7"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cbl0dfghm2m3t" path="res://sprites/Seasonal Tilesets/7 - Hud/carrot.png" id="18_3eg8f"]
 [ext_resource type="Texture2D" uid="uid://bul728afcma7d" path="res://sprites/Seasonal Tilesets/7 - Hud/hearts_hud.png" id="19_uehjn"]
 [ext_resource type="Script" uid="uid://2wiujebc8t6s" path="res://scripts/ammo_display.gd" id="ammo_display_script"]
+[ext_resource type="Script" uid="uid://btbt1vv6as2jn" path="res://scripts/energy_bar.gd" id="energy_bar_script"]
 [ext_resource type="Script" uid="uid://dfkv1b2fk8lgc" path="res://scripts/hp_container.gd" id="hp_container_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d18o5"]
@@ -244,8 +245,10 @@ texture = ExtResource("16_kajwn")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+value = 100.0
 texture_under = ExtResource("16_b78wb")
-texture_over = ExtResource("17_kajwn")
+texture_progress = ExtResource("17_kajwn")
+script = ExtResource("energy_bar_script")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/container/HBoxContainer/VBoxContainer"]
 layout_mode = 2

@@ -47,6 +47,9 @@ enum ProjectileType {
 var current_projectile = ProjectileType.APPLE
 var throw_cooldown = 0.0
 const THROW_COOLDOWN_DURATION = 0.5
+var distance_traveled = 0.0
+const ENERGY_PER_1000_PIXELS = 10
+const ENERGY_PER_DOUBLE_JUMP = 10
 		
 func _ready() -> void:
 	go_to_idle_state()
@@ -99,10 +102,21 @@ func go_to_walk_state():
 	anim.play("walk")
 
 func go_to_jump_state():
+	# Impedir double jump se energia estiver em 0
+	if jump_count >= 1 and Globals.energy <= 0:
+		print("[ENERGY] Sem energia para double jump!")
+		return
+	
 	status = PlayerState.jump
 	anim.play("jump")
 	velocity.y = JUMP_VELOCITY
 	jump_count += 1
+	
+	# Perder energia no double jump
+	if jump_count == 2:
+		print("[ENERGY] Double jump! Energia antes: ", Globals.energy)
+		Globals.energy = max(0, Globals.energy - ENERGY_PER_DOUBLE_JUMP)
+		print("[ENERGY] Energia depois do double jump: ", Globals.energy)
 	
 func go_to_fall_state():
 	status = PlayerState.fall
@@ -242,7 +256,21 @@ func move(delta):
 	update_direction()
 	
 	if direction:
-		velocity.x = move_toward(velocity.x, direction * max_speed, acceleration * delta)
+		# Reduzir velocidade se energia estiver em 0
+		var current_speed = max_speed
+		if Globals.energy <= 0:
+			current_speed = max_speed * 0.5  # 50% da velocidade normal
+		
+		velocity.x = move_toward(velocity.x, direction * current_speed, acceleration * delta)
+		# Acumular distância percorrida
+		distance_traveled += abs(velocity.x * delta)
+		# Perder energia a cada 1000 pixels
+		if distance_traveled >= 1000:
+			print("[ENERGY] 1000 pixels percorridos! Distância: ", distance_traveled)
+			print("[ENERGY] Energia antes: ", Globals.energy)
+			Globals.energy = max(0, Globals.energy - ENERGY_PER_1000_PIXELS)
+			print("[ENERGY] Energia depois de andar: ", Globals.energy)
+			distance_traveled -= 1000
 	else:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 	
@@ -333,9 +361,10 @@ func take_damage():
 		go_to_hurt_state()
 
 func _on_reload_timer_timeout() -> void:
-	# Resetar munição ao reiniciar a cena
+	# Resetar munição e energia ao reiniciar a cena
 	Globals.apples = 10
 	Globals.carrots = 10
+	Globals.energy = 100
 	get_tree().reload_current_scene()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
