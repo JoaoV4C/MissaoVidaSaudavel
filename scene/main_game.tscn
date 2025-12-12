@@ -1,10 +1,9 @@
-[gd_scene load_steps=26 format=4 uid="uid://dol6aewxs6gs6"]
+[gd_scene load_steps=25 format=4 uid="uid://dol6aewxs6gs6"]
 
 [ext_resource type="PackedScene" uid="uid://b4uyanguafauh" path="res://entities/player.tscn" id="1_main"]
 [ext_resource type="TileSet" uid="uid://ci6yocecub5y3" path="res://tiles/terrain.tres" id="2_main"]
 [ext_resource type="TileSet" uid="uid://ckf2afy4m5an6" path="res://tiles/decoration.tres" id="3_main"]
 [ext_resource type="Texture2D" uid="uid://ca6wptqg1wg24" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/5 - Sky_color.png" id="4_main"]
-[ext_resource type="TileSet" uid="uid://evyc8spfes4j" path="res://tiles/underwater.tres" id="4_yb0q2"]
 [ext_resource type="Texture2D" uid="uid://tsqqufbk23of" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/4 - Floating_clouds.png" id="5_main"]
 [ext_resource type="Texture2D" uid="uid://bxlggdi5ar5v2" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/3 - Background_clouds.png" id="6_main"]
 [ext_resource type="Texture2D" uid="uid://03troodjjnh3" path="res://sprites/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="7_main"]
@@ -40,13 +39,8 @@ tile_map_data = PackedByteArray("AAAAAAsAAAAEAAEAAAAAAAwAAAAEAAIAAAAAAA0AAAAEAAI
 tile_set = ExtResource("2_main")
 
 [node name="Decoration" type="TileMapLayer" parent="TileMaps"]
-tile_map_data = PackedByteArray("AAAGAAoAAQAAAAAAAAAGAAkAAwABAAEAAAAHAAoAAQAAAAAAAAAQAAkAAwABAAEAAAAUAAoAAAABAAUAAAAVAAkAAAAJAAEAAAAaAAgAAgAAAAAAAAAfAAoAAAADAAUAAAA=")
+tile_map_data = PackedByteArray("AAAGAAoAAQAAAAAAAAAGAAkAAwABAAEAAAAHAAoAAQAAAAAAAAAQAAkAAwABAAEAAAAUAAoAAAABAAUAAAAVAAkAAAAJAAEAAAAfAAoAAAADAAUAAAAaAAgAAgAAAAAAAAA=")
 tile_set = ExtResource("3_main")
-
-[node name="Underwater" type="TileMapLayer" parent="TileMaps" groups=["Water"]]
-z_index = -1
-tile_map_data = PackedByteArray("AAAjAAsAAAAAAAAAAAA=")
-tile_set = ExtResource("4_yb0q2")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -123,6 +117,14 @@ offset = Vector2(0, 208)
 region_enabled = true
 region_rect = Rect2(0, 0, 576, 208)
 
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/2-Water"]
+position = Vector2(0, -57)
+texture = ExtResource("7_main")
+centered = false
+offset = Vector2(0, 208)
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
 [node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/2-Water"]
 position = Vector2(574, -160)
 texture = ExtResource("7_main")
@@ -131,8 +133,24 @@ offset = Vector2(0, 208)
 region_enabled = true
 region_rect = Rect2(0, 0, 576, 208)
 
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/2-Water"]
+position = Vector2(574, -57)
+texture = ExtResource("7_main")
+centered = false
+offset = Vector2(0, 208)
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
 [node name="Sprite2D5" type="Sprite2D" parent="ParallaxBackground/2-Water"]
 position = Vector2(1151, -160)
+texture = ExtResource("7_main")
+centered = false
+offset = Vector2(0, 208)
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="Sprite2D6" type="Sprite2D" parent="ParallaxBackground/2-Water"]
+position = Vector2(1151, -57)
 texture = ExtResource("7_main")
 centered = false
 offset = Vector2(0, 208)
